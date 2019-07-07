@@ -1,0 +1,32 @@
+<div class="w3-container">
+    <h1>Carreras</h1>
+    <button title="Editar" [routerLink]="['/carrera-form']" class="w3-btn w3-round w3-blue botonCrear">
+      <i class="fa fa-plus" aria-hidden="true"> </i> Crear 
+    </button>
+  
+    <div>
+            <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
+      <table class="w3-table-all w3-hoverable">
+          <thead>
+              <tr>
+                  <th class="w3-center">Nombre Carrera</th>
+                  <th class="w3-center">Descripcion</th>
+                 
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let c of carrerasa">
+                  <td class="w3-center"> {{ c.Nombre }}</td>
+                  <td class="w3-center">{{ c.Descripcion }}</td>
+                  
+                  <td class="w3-center">
+                      <button title="Editar" [routerLink]="['/carrera-form']" [queryParams]="{id : d.id}" class="w3-btn w3-blue">
+                        <i class="fa fa-pencil" aria-hidden="true"> </i> 
+                      </button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+    </div>
+  

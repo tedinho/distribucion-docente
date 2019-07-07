@@ -1,0 +1,29 @@
+<div class="w3-container">
+<h1>Administración de Parametros</h1>
+<br />
+<div>
+        <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
+  <table class="w3-table-all w3-hoverable">
+      <thead>
+          <tr>
+              <th class="w3-center">Id</th>
+              <th class="w3-center">Valor</th>
+              <th class="w3-center">Descripción</th>
+              <th class="w3-center">Opcion</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let p of parametros">
+              <td class="w3-center">{{ p.id }}</td>
+              <td class="w3-center">{{ p.valor }}</td>
+              <td class="w3-center">{{ p.descripcion }}</td>
+              <td class="w3-center">
+                  <button title="Editar" [routerLink]="['/parametro-form']" [queryParams]="{id : p.id}" class="w3-btn w3-blue">
+                    <i class="fa fa-pencil" aria-hidden="true"> </i> 
+                  </button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+</div>

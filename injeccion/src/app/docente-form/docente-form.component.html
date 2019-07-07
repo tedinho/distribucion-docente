@@ -1,0 +1,45 @@
+<style>
+  .boton-guardar{
+      width: 100%;color: #fff;background: #009688;
+  }
+  </style>
+  <form #parametroForm="ngForm">
+  <div class="field" class="w3-container">
+      <h1>Docente</h1>
+      <div style="max-width: 40%">
+              <label>Primer Nombre</label>
+              <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre1" required="true"
+              [(ngModel)]="docente.nombre1" [ngModelOptions]="{standalone: true}"/>
+              <br />
+              <label>Segundo Nombre</label>
+              <input type="text" class="w3-input w3-border w3-round-large" id="txtNOmbre2"
+              [(ngModel)]="docente.nombre2" [ngModelOptions]="{standalone: true}"/>
+              <br />
+              <label>Primer Apellido</label>
+              <input type="text" class="w3-input w3-border w3-round-large" id="txtApellido1" required="true"
+              [(ngModel)]="docente.apellido1" [ngModelOptions]="{standalone: true}"/>
+              <br />
+              <label>Segundo Apellido</label>
+              <input type="text" class="w3-input w3-border w3-round-large" id="txtApellido2"
+              [(ngModel)]="docente.apellido2" [ngModelOptions]="{standalone: true}"/>
+              <br />
+              <label>Cedula</label>
+              <input type="text" class="w3-input w3-border w3-round-large" id="txtCedula"
+              [(ngModel)]="docente.cedula" [ngModelOptions]="{standalone: true}"/>
+              <br />
+              <label>Correo</label>
+              <input type="text" class="w3-input w3-border w3-round-large" id="txtCorreo"
+              [(ngModel)]="docente.correo" [ngModelOptions]="{standalone: true}"/>
+              <br />
+              <label>Tipo Contrato</label>
+              <select class="w3-select w3-border" name="repeatSelect" id="repeatSelect" [(ngModel)]="docente.tipo_contrato">
+                <option value="" disabled selected>Seleccionar</option>
+                <option value="Medio Tiempo">Medio Tiempo</option>
+                <option value="Tiempo Completo">Tiempo Completo</option>
+              </select>
+              <br />
+              <br />  
+              <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
+      </div>
+  </div>
+  </form>

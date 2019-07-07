@@ -1,0 +1,23 @@
+<style>
+    .boton-guardar{
+        width: 100%;color: #fff;background: #009688;
+    }
+    </style>
+    <form #carreraForm="ngForm">
+    <div class="field" class="w3-container">
+        <h1>Carrera</h1>
+        <div style="max-width: 40%">
+                <label>Nombre Carrera</label>
+                <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre1" required="true"
+                [(ngModel)]="Carrera.Nombre" [ngModelOptions]="{standalone: true}"/>
+                <br />
+                <label>Descripcion</label>
+                <input type="text" class="w3-input w3-border w3-round-large" id="txtNOmbre2"
+                [(ngModel)]="Carrera.Descripcion" [ngModelOptions]="{standalone: true}"/>
+                <br />
+                <br />  
+                <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
+        </div>
+    </div>
+    </form>
+  

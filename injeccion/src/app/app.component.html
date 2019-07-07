@@ -1,0 +1,11 @@
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+  <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+  <button class="w3-bar-item w3-button" [routerLink]="['/parametro-lista']">Administración de Parametros</button>
+  <button class="w3-bar-item w3-button" [routerLink]="['/docente-lista']">Administración de Docentes</button>
+  <button class="w3-bar-item w3-button" [routerLink]="['/carrera-lista']">Administración de Carreras</button>
+</div>
+<!-- Page Content -->
+<div class="w3-teal">
+  <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+</div>
+<router-outlet></router-outlet>

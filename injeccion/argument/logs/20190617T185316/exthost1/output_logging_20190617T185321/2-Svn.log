@@ -1,0 +1,2 @@
+Using svn "1.10.0" from "svn"
+[settings.json]$ svn info --xml

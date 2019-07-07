@@ -1,0 +1,26 @@
+<style>
+.boton-guardar{
+    width: 100%;color: #fff;background: #009688;
+}
+</style>
+<form #parametroForm="ngForm">
+<div class="field" class="w3-container">
+    <h1>Parametro</h1>
+    <div style="max-width: 40%">
+            <label>Id</label>
+            <input type="text" class="w3-input w3-border w3-round-large" id="id" readonly="true"
+            [(ngModel)]="parametro.id" [ngModelOptions]="{standalone: true}"/>
+            <br />
+            <label>Valor</label>
+            <input type="text" class="w3-input w3-border w3-round-large" id="id" required="true"
+            [(ngModel)]="parametro.valor" [ngModelOptions]="{standalone: true}"/>
+            <br />
+            <label>Descripción</label>
+            <input type="text" class="w3-input w3-border w3-round-large" id="id" required="true"
+            [(ngModel)]="parametro.descripcion" [ngModelOptions]="{standalone: true}"/>
+            <br />
+
+            <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
+    </div>
+</div>
+</form>
