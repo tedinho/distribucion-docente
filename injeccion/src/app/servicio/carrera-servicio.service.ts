@@ -13,24 +13,24 @@ export class CarreraServicioService {
 
   constructor(private http: Http) { }
 
-  getCarreras():Observable<Carrera[]> {
-    return this.http.get(API_URL+'carreras')
-    .pipe(map(res => res.json()));
+  getCarreras(): Observable<Carrera[]> {
+    return this.http.get(API_URL + 'carreras')
+      .pipe(map(res => res.json()));
   }
 
-  buscarCarrera(llave:number):Observable<Carrera>{
-    return this.http.get(API_URL+'carreras/'+llave+'')
-    .pipe(map(res => res.json()));
+  buscarCarrera(llave: number): Observable<Carrera> {
+    return this.http.get(API_URL + 'carreras/' + llave + '')
+      .pipe(map(res => res.json()));
   }
 
-  actualizarCarrera(carrera,id){
-    return this.http.patch(API_URL + 'carreras/'+id,carrera
-    ).pipe(map(res => res.json().data));
+  actualizarCarrera(carrera, id) {
+    return this.http.patch(API_URL + 'carreras/' + id, carrera
+    ).pipe(map(res => res.json()));
   }
 
-  guardarCarrera(carrera){
-    return this.http.post(API_URL + 'carreras/',carrera
-    ).pipe(map(res => res.json().data));
+  guardarCarrera(carrera) {
+    return this.http.post(API_URL + 'carreras/', carrera
+    ).pipe(map(res => res.json()));
   }
 
 }

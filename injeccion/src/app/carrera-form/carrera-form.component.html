@@ -14,10 +14,43 @@
                 <label>Descripcion</label>
                 <input type="text" class="w3-input w3-border w3-round-large" id="txtDescripccion"
                 [(ngModel)]="carrera.descripcion" [ngModelOptions]="{standalone: true}"/>
-                <br />
                 <br />  
-                <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
         </div>
+        <div class="w3-container" style="max-width: 60%">
+            <h3>Niveles</h3>
+            <button style="width: 150px;" type="button" class="boton-guardar w3-btn w3-round" (click)="agregarNivel();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar</button>
+            <br />
+            <br />
+            <table *ngIf="niveles.length!=0" class="w3-table-all w3-hoverable">
+                <thead>
+                    <tr>
+                        <th class="w3-center">Nivel</th>
+                        <th class="w3-center">Opción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let n of niveles">
+                        <td class="w3-center">
+                            <input type="text" class="w3-input w3-border w3-round-large" id="txtNombreNivel" required="true"
+                            [(ngModel)]="n.nombre" [ngModelOptions]="{standalone: true}"/>
+                        </td>
+                        
+                        <td class="w3-center">
+                                <button type="button" class="w3-btn w3-round w3-teal" (click)="quitarNivel(n);">
+                                    <i class="fa fa-minus" aria-hidden="true"> </i>
+                                </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br />
+        <br />  
+        <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
+        <br />
+        <br />
     </div>
     </form>
   

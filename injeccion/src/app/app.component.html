@@ -1,8 +1,11 @@
-<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;width: 350px;" id="mySidebar">
   <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <button class="w3-bar-item w3-button" [routerLink]="['/parametro-lista']">Administración de Parametros</button>
-  <button class="w3-bar-item w3-button" [routerLink]="['/docente-lista']">Administración de Docentes</button>
-  <button class="w3-bar-item w3-button" [routerLink]="['/carrera-lista']">Administración de Carreras</button>
+  <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom w3-border-top" [routerLink]="['/parametro-lista']"><i class="fa fa-list" aria-hidden="true"></i>
+    Administración de Parametros</button>
+  <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom" [routerLink]="['/docente-lista']"><i class="fa fa-users" aria-hidden="true"></i>
+    Administración de Docentes</button>
+  <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom" [routerLink]="['/carrera-lista']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+    Administración de Carreras</button>
 </div>
 <!-- Page Content -->
 <div class="w3-teal">

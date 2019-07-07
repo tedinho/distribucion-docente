@@ -40,10 +40,7 @@ class CarreraController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $this->post->create($input);
-        return [
-            'state' => 'OK'
-        ];
+        return $this->post->create($input);
     }
 
     /**

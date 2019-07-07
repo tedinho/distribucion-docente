@@ -8,6 +8,10 @@ class Carrera extends Model
 {
     protected $table = 'carreras';
     protected $primaryKey = 'id';
-    protected $fillable = ['nombre','descripcion','id'];
+    protected $fillable = ['id','nombre','descripcion'];
     public $timestamps = false;
+
+    public function niveles() { 
+        return $this->hasMany(Nivel::class,"carreras_id"); 
+    }
 }

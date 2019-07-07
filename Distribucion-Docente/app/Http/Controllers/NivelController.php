@@ -3,17 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Nivel;
 
 class NivelController extends Controller
 {
+
+
+    public function __construct(\App\Nivel $post)
+    {
+        $this->post=$post;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(\App\Nivel $post)
     {
-        //
+        return $post->all();
+    }
+
+    public function buscarPorIdCarrera($id=2){
+        return $this->post->where('carreras_id', $id)->get();
     }
 
     /**
@@ -34,7 +46,11 @@ class NivelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $this->post->create($input);
+        return [
+            'state' => 'OK'
+        ];
     }
 
     /**
@@ -68,7 +84,9 @@ class NivelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $this->post->where('id', $id)->update($input);
+        return $this->post->find($id);
     }
 
     /**
@@ -79,6 +97,7 @@ class NivelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = $this->post->destroy($id);
+        return ['message' => 'deleted successfully', 'post_id' => $post];
     }
 }

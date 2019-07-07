@@ -22,3 +22,6 @@ Route::resource('docentes', 'DocenteController');
 Route::resource('parametros', 'ParametroController');
 
 Route::resource('carreras', 'CarreraController');
+Route::get('niveles/porCarrera/{id}', 'NivelController@buscarPorIdCarrera')->name('nivel.buscarPorIdCarrera');
+Route::resource('niveles', 'NivelController');
+
