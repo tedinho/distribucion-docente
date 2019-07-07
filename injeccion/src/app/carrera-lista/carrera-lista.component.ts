@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Carrera } from 'src/modelos/Carrera';
-import { CarreraServicioService } from '../servicio/Carrera-servicio.service';
 import { first } from 'rxjs/operators';
+import { CarreraServicioService } from '../servicio/carrera-servicio.service';
 
 @Component({
   selector: 'app-carrera-lista',
@@ -10,7 +10,7 @@ import { first } from 'rxjs/operators';
 })
 export class CarreraListaComponent implements OnInit {
 
-  carrerasa:Carrera[];
+  carreras:Carrera[];
   errorMessage:string;
 
   constructor(private carreraServicio:CarreraServicioService) { }
@@ -24,7 +24,7 @@ export class CarreraListaComponent implements OnInit {
     .getCarreras()
     .pipe(first())
     .subscribe(
-      carreras => this.carrerasa = carreras,
+      carreras => this.carreras = carreras,
       error => this.errorMessage = <any>error
     );
 }

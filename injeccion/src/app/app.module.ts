@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'docente-lista' , component: DocenteListaComponent },
   { path: 'docente-form' , component: DocenteFormComponent },
   { path: 'carrera-form' , component: CarreraFormComponent },
-  { path: 'carrera-list' , component: CarreraListaComponent },
+  { path: 'carrera-lista' , component: CarreraListaComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

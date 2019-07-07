@@ -15,12 +15,12 @@
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let c of carrerasa">
-                  <td class="w3-center"> {{ c.Nombre }}</td>
-                  <td class="w3-center">{{ c.Descripcion }}</td>
+              <tr *ngFor="let c of carreras">
+                  <td class="w3-center"> {{ c.nombre }}</td>
+                  <td class="w3-center">{{ c.descripcion }}</td>
                   
                   <td class="w3-center">
-                      <button title="Editar" [routerLink]="['/carrera-form']" [queryParams]="{id : d.id}" class="w3-btn w3-blue">
+                      <button title="Editar" [routerLink]="['/carrera-form']" [queryParams]="{id : c.id}" class="w3-btn w3-blue">
                         <i class="fa fa-pencil" aria-hidden="true"> </i> 
                       </button>
                   </td>
