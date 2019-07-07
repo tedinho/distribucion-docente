@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Carrera extends Model
+class Nivel extends Model
 {
-    protected $table = 'carreras';
+    protected $table = 'niveles';
     protected $primaryKey = 'id';
-    protected $fillable = ['nombre','descripcion','id'];
+    protected $fillable = ['id','nombre','descripcion','carreras_id'];
     public $timestamps = false;
 }

@@ -24,7 +24,7 @@ export class DocenteListaComponent implements OnInit {
     .getDocentes()
     .pipe(first())
     .subscribe(
-      docentes => this.docentesa = docentes,
+      docentes => {this.docentesa = docentes; console.log(docentes)},
       error => this.errorMessage = <any>error
     );
   }
