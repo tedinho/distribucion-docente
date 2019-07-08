@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/css/w3.css",
               "src/styles.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
