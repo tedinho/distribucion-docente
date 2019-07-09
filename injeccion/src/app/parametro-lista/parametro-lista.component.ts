@@ -13,6 +13,7 @@ export class ParametroListaComponent implements OnInit {
 
   parametros:Parametro[];
   errorMessage:string;
+  pageParametros: number = 1;
   constructor(private parametroServicio:ParametroService) { }
 
   ngOnInit() {

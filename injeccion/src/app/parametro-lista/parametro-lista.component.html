@@ -13,7 +13,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let p of parametros">
+          <tr *ngFor="let p of parametros | paginate: { itemsPerPage: 10, currentPage: pageParametros}">
               <td class="w3-center">{{ p.id }}</td>
               <td class="w3-center">{{ p.valor }}</td>
               <td class="w3-center">{{ p.descripcion }}</td>
@@ -25,5 +25,6 @@
           </tr>
       </tbody>
   </table>
+  <pagination-controls (pageChange)="pageParametros = $event"></pagination-controls>
 </div>
 </div>

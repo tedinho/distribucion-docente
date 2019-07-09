@@ -13,6 +13,9 @@ import { DocenteFormComponent } from './docente-form/docente-form.component';
 import { CarreraListaComponent } from './carrera-lista/carrera-lista.component';
 import { CarreraFormComponent } from './carrera-form/carrera-form.component';
 
+//dependencias externas
+import {NgxPaginationModule} from 'ngx-pagination';
+
 
 const routes: Routes = [
   { path: 'parametro-lista', component: ParametroListaComponent },
@@ -41,6 +44,7 @@ const routes: Routes = [
     HttpModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

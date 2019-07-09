@@ -16,6 +16,7 @@ export class DocenteFormComponent implements OnInit {
   id:number;
   errorMessage:string;
   tipoContratoItem:string[];
+  pageDocentes: number= 1;
 
   constructor(private docenteServicio:DocenteServicioService, private route: ActivatedRoute,private router: Router) { }
 

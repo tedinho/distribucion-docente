@@ -1,12 +1,12 @@
 <div class="w3-container">
-  <h1>Administración de Parametros</h1>
+  <h1>Administración de Docentes</h1>
   <button title="Editar" [routerLink]="['/docente-form']" class="w3-btn w3-round w3-blue botonCrear">
     <i class="fa fa-plus" aria-hidden="true"> </i> Crear 
   </button>
 
   <div>
           <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
-    <table class="w3-table-all w3-hoverable">
+    <table class="w3-table-all w3-hoverable" >
         <thead>
             <tr>
                 <th class="w3-center">Nombre</th>
@@ -16,7 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let d of docentesa">
+            <tr *ngFor="let d of docentesa | paginate: { itemsPerPage: 10, currentPage: pageDocentes }">
                 <td class="w3-center"> {{ d.nombre1 }} {{ d.apellido1 }}</td>
                 <td class="w3-center">{{ d.correo }}</td>
                 <td class="w3-center">{{ d.tipo_contrato }}</td>
@@ -28,5 +28,6 @@
             </tr>
         </tbody>
     </table>
+    <pagination-controls (pageChange)="pageDocentes = $event"></pagination-controls>
   </div>
   </div>
