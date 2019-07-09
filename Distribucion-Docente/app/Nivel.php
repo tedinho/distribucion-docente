@@ -15,4 +15,8 @@ class Nivel extends Model
     {
         return $this->belongsTo(Carrera::class,"carreras_id");
     }
+
+    public function paralelos() { 
+        return $this->hasMany(Paralelo::class,"niveles_id"); 
+    }
 }

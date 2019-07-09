@@ -41,7 +41,7 @@ export class NivelServicioService {
 
   guardarNivel(nivel) {
     return this.http.post(API_URL + 'niveles/', nivel
-    ).pipe(map(res => res.json().data));
+    ).pipe(map(res => res.json()));
   }
 
   actualizarNivel(nivel, id) {

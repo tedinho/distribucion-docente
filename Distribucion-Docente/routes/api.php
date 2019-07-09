@@ -25,3 +25,6 @@ Route::resource('carreras', 'CarreraController');
 Route::get('niveles/porCarrera/{id}', 'NivelController@buscarPorIdCarrera')->name('nivel.buscarPorIdCarrera');
 Route::resource('niveles', 'NivelController');
 
+Route::get('paralelos/porNivel/{id}', 'ParaleloController@buscarPorIdNivel')->name('paralelo.buscarPorIdNivel');
+Route::resource('paralelos', 'ParaleloController');
+

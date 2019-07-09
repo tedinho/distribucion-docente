@@ -3,29 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Nivel;
 
-class NivelController extends Controller
+use App\Paralelo;
+
+class ParaleloController extends Controller
 {
 
-
-    public function __construct(\App\Nivel $post)
+    public function __construct(\App\Paralelo $post)
     {
         $this->post=$post;
     }
+
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(\App\Nivel $post)
+    public function index(\App\Paralelo $post)
     {
         return $post->all();
     }
 
-    public function buscarPorIdCarrera($id){
-        return $this->post->where('carreras_id', $id)->get();
+    public function buscarPorIdNivel($id){
+        return $this->post->where('niveles_id', $id)->get();
     }
 
     /**
@@ -47,7 +48,10 @@ class NivelController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        return $this->post->create($input);;
+        $this->post->create($input);
+        return [
+            'state' => 'OK'
+        ];
     }
 
     /**

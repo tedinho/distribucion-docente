@@ -1,24 +1,27 @@
 <style>
-    .boton-guardar{
-        width: 100%;color: #fff;background: #009688;
+    .boton-guardar {
+        width: 100%;
+        color: #fff;
+        background: #009688;
     }
-    </style>
-    <form #carreraForm="ngForm">
+</style>
+<form #carreraForm="ngForm">
     <div class="field" class="w3-container">
         <h1>Carrera</h1>
         <div style="max-width: 40%">
-                <label>Nombre Carrera</label>
-                <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre" required="true"
-                [(ngModel)]="carrera.nombre" [ngModelOptions]="{standalone: true}"/>
-                <br />
-                <label>Descripcion</label>
-                <input type="text" class="w3-input w3-border w3-round-large" id="txtDescripccion"
-                [(ngModel)]="carrera.descripcion" [ngModelOptions]="{standalone: true}"/>
-                <br />  
+            <label>Nombre Carrera</label>
+            <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre" required="true"
+                [(ngModel)]="carrera.nombre" [ngModelOptions]="{standalone: true}" />
+            <br />
+            <label>Descripcion</label>
+            <input type="text" class="w3-input w3-border w3-round-large" id="txtDescripccion"
+                [(ngModel)]="carrera.descripcion" [ngModelOptions]="{standalone: true}" />
+            <br />
         </div>
         <div class="w3-container" style="max-width: 60%">
             <h3>Niveles</h3>
-            <button style="width: 150px;" type="button" class="boton-guardar w3-btn w3-round" (click)="agregarNivel();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar</button>
+            <button style="width: 150px;" type="button" class="boton-guardar w3-btn w3-round"
+                (click)="agregarNivel();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar</button>
             <br />
             <br />
             <table *ngIf="niveles.length!=0" class="w3-table-all w3-hoverable">
@@ -31,14 +34,20 @@
                 <tbody>
                     <tr *ngFor="let n of niveles">
                         <td class="w3-center">
-                            <input type="text" class="w3-input w3-border w3-round-large" id="txtNombreNivel" required="true"
-                            [(ngModel)]="n.nombre" [ngModelOptions]="{standalone: true}"/>
+                            <input type="text" class="w3-input w3-border w3-round-large" id="txtNombreNivel"
+                                required="true" [(ngModel)]="n.nombre" [ngModelOptions]="{standalone: true}" />
                         </td>
-                        
+
                         <td class="w3-center">
-                                <button type="button" class="w3-btn w3-round w3-teal" (click)="quitarNivel(n);">
-                                    <i class="fa fa-minus" aria-hidden="true"> </i>
-                                </button>
+                            <button type="button" title="Eliminar" class="w3-btn w3-round w3-teal"
+                                (click)="quitarNivel(n);">
+                                <i class="fa fa-minus" aria-hidden="true"> </i>
+                            </button>
+                            <button onclick="document.getElementById('popParalelos').style.display='block'"
+                                style="margin-left: 3px;" (click)="abrirPopParalelos(n);" type="button"
+                                title="Paralelos" class="w3-btn w3-round w3-teal">
+                                <i class="fa fa-list" aria-hidden="true"> </i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -46,11 +55,62 @@
 
         </div>
 
+
+        <div id="popParalelos" class="w3-modal">
+            <div class="w3-modal-content">
+                <div style="max-height: 400px; overflow-y: auto;">
+                    <header class="w3-container w3-teal">
+                        <span onclick="document.getElementById('popParalelos').style.display='none'"
+                        (click)="cerrarPopParalelos();" class="w3-button w3-display-topright">&times;</span>
+                        <h2 *ngIf="nivel!=null">{{ nivel.nombre }}</h2>
+                    </header>
+                    <br />
+                    <div class="w3-container">
+
+                        <button style="width: 200px;" type="button" class="boton-guardar w3-btn w3-round"
+                            (click)="agregarParalelo();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar Paralelo</button>
+                        <br />
+                        <br />
+                        <table *ngIf="paralelos.length!=0" class="w3-table-all w3-hoverable">
+                            <thead>
+                                <tr>
+                                    <th class="w3-center">Paralelo</th>
+                                    <th class="w3-center">Opción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let p of paralelos">
+                                    <td class="w3-center">
+                                        <input type="text" class="w3-input w3-border w3-round-large"
+                                            id="txtNombreParalelo" required="true" [(ngModel)]="p.nombre"
+                                            [ngModelOptions]="{standalone: true}" />
+                                    </td>
+
+                                    <td class="w3-center">
+                                        <button type="button" title="Eliminar" class="w3-btn w3-round w3-teal"
+                                            (click)="quitarParalelo(p);">
+                                            <i class="fa fa-minus" aria-hidden="true"> </i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <button (click)="guardarParalelos();" onclick="document.getElementById('popParalelos').style.display='none'" type="button" class="boton-guardar w3-btn w3-round">Guardar Paralelos</button>
+                        <br />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
         <br />
-        <br />  
+        <br />
         <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
         <br />
         <br />
     </div>
-    </form>
-  
+</form>

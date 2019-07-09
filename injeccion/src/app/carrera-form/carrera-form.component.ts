@@ -5,6 +5,8 @@ import { Router, ActivatedRoute, GuardsCheckStart } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { Nivel } from 'src/modelos/Nivel';
 import { NivelServicioService } from '../servicio/nivel-servicio.service';
+import { Paralelo } from 'src/modelos/Paralelo';
+import { ParaleloServicioService } from '../servicio/paralelo-servicio.service';
 
 @Component({
   selector: 'app-carrera-form',
@@ -21,8 +23,12 @@ export class CarreraFormComponent implements OnInit {
   niveles: Nivel[];
   nivel: Nivel;
   nivelesQuitar: Nivel[];
+  paralelos: Paralelo[];
+  paralelosQuitar: Paralelo[];
+  paralelo: Paralelo;
 
-  constructor(private carreraServicio: CarreraServicioService, private nivelServicio: NivelServicioService, private route: ActivatedRoute, private router: Router) { }
+
+  constructor(private carreraServicio: CarreraServicioService, private paraleloServicio: ParaleloServicioService, private nivelServicio: NivelServicioService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.carrera = new Carrera;
@@ -36,6 +42,8 @@ export class CarreraFormComponent implements OnInit {
       });
     this.niveles = [];
     this.nivelesQuitar = [];
+    this.paralelos = [];
+    this.paralelosQuitar = [];
   }
 
   getNiveles() {
@@ -107,6 +115,100 @@ export class CarreraFormComponent implements OnInit {
     if (index !== -1) {
       this.niveles.splice(index, 1);
     }
+  }
+
+  abrirPopParalelos(nivelSeleccionado: Nivel) {
+    this.nivel = nivelSeleccionado;
+    if (this.nivel.id != null) {
+      this.paraleloServicio
+        .getNivelesPorCarrera(this.nivel.id)
+        .pipe(first())
+        .subscribe(
+          paralelos => { this.paralelos = paralelos },
+          error => { this.errorMessage = <any>error }
+        );
+    }
+  }
+
+  agregarParalelo() {
+    this.paralelo = new Paralelo;
+    this.paralelos.push(this.paralelo);
+    this.paralelos.forEach(element => {
+      console.log(element.nombre);
+    });
+  }
+
+  quitarParalelo(p: Paralelo) {
+    if (p.id != null) {
+      this.paralelosQuitar.push(p);
+    }
+
+    const index: number = this.paralelos.indexOf(p);
+    if (index !== -1) {
+      this.paralelos.splice(index, 1);
+    }
+  }
+
+  cerrarPopParalelos() {
+    this.nivel = null;
+    this.paralelos = [];
+  }
+
+  guardarParalelos() {
+    console.log("entro");
+    if (this.carrera.id == null) {
+      this.carreraServicio
+        .guardarCarrera(this.carrera)
+        .pipe(first())
+        .subscribe(
+          carrera => {
+            this.id=carrera.id;
+            this.carrera.id=this.id;
+            console.log(carrera.id);
+            this.nivel.carreras_id = carrera.id;
+            this.nivelServicio
+              .guardarNivel(this.nivel)
+              .pipe(first())
+              .subscribe(
+                nivel => {
+                  const index: number = this.niveles.indexOf(this.nivel);
+                  if (index !== -1) {
+                    this.niveles[index].id = nivel.id;
+                  }
+                  this.paraleloServicio
+                    .guardarLote(this.paralelos, nivel.id);
+                  this.paraleloServicio
+                    .borrarLote(this.paralelosQuitar);
+                  this.cerrarPopParalelos();
+                }
+              );
+          }
+        );
+    } else if (this.nivel.id == null) {
+      this.nivel.carreras_id = this.carrera.id;
+      this.nivelServicio
+        .guardarNivel(this.nivel)
+        .subscribe(
+          nivel => {
+            const index: number = this.niveles.indexOf(this.nivel);
+            if (index !== -1) {
+              this.niveles[index].id = nivel.id;
+            }
+            this.paraleloServicio
+              .guardarLote(this.paralelos, nivel.id);
+            this.paraleloServicio
+              .borrarLote(this.paralelosQuitar);
+            this.cerrarPopParalelos();
+          }
+        );
+    } else {
+      this.paraleloServicio
+        .guardarLote(this.paralelos, this.nivel.id);
+      this.paraleloServicio
+        .borrarLote(this.paralelosQuitar);
+      this.cerrarPopParalelos();
+    }
+
   }
 
 
