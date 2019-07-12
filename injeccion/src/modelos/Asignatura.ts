@@ -4,6 +4,7 @@ export interface Asignatura{
     id:number;
     nombre:string;
     descripcion:string;
-    horasClases:number;
+    horas_clase:number;
+    paralelos_id:number;
     paralelo:Paralelo;
 }

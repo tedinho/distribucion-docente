@@ -1,4 +1,5 @@
 import { Nivel } from './Nivel';
+import { Asignatura } from './Asignatura';
 
 export class Paralelo{
 
@@ -6,5 +7,6 @@ export class Paralelo{
     nombre:string;
     nivel:Nivel;
     niveles_id:number;
+    asignaturaTransient:Asignatura[];
     
 }

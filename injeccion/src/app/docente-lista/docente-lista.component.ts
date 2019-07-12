@@ -17,7 +17,7 @@ export class DocenteListaComponent implements OnInit {
   constructor(private docenteServicio: DocenteServicioService) { }
 
   ngOnInit() {
-    this.txtNombre = "Juan";
+    this.txtNombre = "";
     this.getDocentes();
   }
 

@@ -7,6 +7,7 @@ import { Nivel } from 'src/modelos/Nivel';
 import { NivelServicioService } from '../servicio/nivel-servicio.service';
 import { Paralelo } from 'src/modelos/Paralelo';
 import { ParaleloServicioService } from '../servicio/paralelo-servicio.service';
+import { Asignatura } from 'src/modelos/Asignatura';
 
 @Component({
   selector: 'app-carrera-form',
@@ -26,6 +27,8 @@ export class CarreraFormComponent implements OnInit {
   paralelos: Paralelo[];
   paralelosQuitar: Paralelo[];
   paralelo: Paralelo;
+
+  asignaturas:Asignatura[];
 
 
   constructor(private carreraServicio: CarreraServicioService, private paraleloServicio: ParaleloServicioService, private nivelServicio: NivelServicioService, private route: ActivatedRoute, private router: Router) { }
@@ -162,8 +165,8 @@ export class CarreraFormComponent implements OnInit {
         .pipe(first())
         .subscribe(
           carrera => {
-            this.id=carrera.id;
-            this.carrera.id=this.id;
+            this.id = carrera.id;
+            this.carrera.id = this.id;
             console.log(carrera.id);
             this.nivel.carreras_id = carrera.id;
             this.nivelServicio
