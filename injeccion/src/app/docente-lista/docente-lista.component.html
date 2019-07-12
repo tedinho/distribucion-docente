@@ -1,33 +1,46 @@
 <div class="w3-container">
   <h1>Administración de Docentes</h1>
   <button title="Editar" [routerLink]="['/docente-form']" class="w3-btn w3-round w3-blue botonCrear">
-    <i class="fa fa-plus" aria-hidden="true"> </i> Crear 
+    <i class="fa fa-plus" aria-hidden="true"> </i> Crear
   </button>
 
-  <div>
-          <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
-    <table class="w3-table-all w3-hoverable" >
-        <thead>
-            <tr>
-                <th class="w3-center">Nombre</th>
-                <th class="w3-center">Correo</th>
-                <th class="w3-center">Tipo Contrato</th>
-                <th class="w3-center">Opcion</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let d of docentesa | paginate: { itemsPerPage: 10, currentPage: pageDocentes }">
-                <td class="w3-center"> {{ d.nombre1 }} {{ d.apellido1 }}</td>
-                <td class="w3-center">{{ d.correo }}</td>
-                <td class="w3-center">{{ d.tipo_contrato }}</td>
-                <td class="w3-center">
-                    <button title="Editar" [routerLink]="['/docente-form']" [queryParams]="{id : d.id}" class="w3-btn w3-blue">
-                      <i class="fa fa-pencil" aria-hidden="true"> </i> 
-                    </button>
-                </td>
-            </tr>
-        </tbody>
+  <legend>Búsqueda:</legend>
+  <span class="bmd-form-group">
+    <div class="input-group no-border">
+      <input type="text" maxlength="10" class="form-control" placeholder="Ingrese su Id o Nombre" size="20"
+        style="font-family: Arial; font-size: 20px" [(ngModel)]="txtNombre" [ngModelOptions]="{standalone: true}">
+    </div>
+  </span>
+  <p></p><p>
+    <div class="col-12">
+        <button title="Buscar" class="w3-btn w3-round w3-blue botonBuscar" (click)="buscar();">
+            <i class="fa fa-search" aria-hidden="true"> </i> Buscar</button>
+        </div>
+        <p></p><p></p>
+  <div>   
+    <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
+    <table class="w3-table-all w3-hoverable">
+      <thead>
+        <tr>
+          <th class="w3-center">Nombre</th>
+          <th class="w3-center">Correo</th>
+          <th class="w3-center">Tipo Contrato</th>
+          <th class="w3-center">Opcion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of docentesa | paginate: { itemsPerPage: 10, currentPage: pageDocentes }">
+          <td class="w3-center"> {{ d.nombre1 }} {{ d.apellido1 }}</td>
+          <td class="w3-center">{{ d.correo }}</td>
+          <td class="w3-center">{{ d.tipo_contrato }}</td>
+          <td class="w3-center">
+            <button title="Editar" [routerLink]="['/docente-form']" [queryParams]="{id : d.id}" class="w3-btn w3-blue">
+              <i class="fa fa-pencil" aria-hidden="true"> </i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
     </table>
     <pagination-controls (pageChange)="pageDocentes = $event"></pagination-controls>
   </div>
-  </div>
+</div>

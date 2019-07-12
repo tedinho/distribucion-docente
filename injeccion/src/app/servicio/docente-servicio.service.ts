@@ -13,7 +13,12 @@ export class DocenteServicioService {
 
   constructor(private http: Http) { }
 
-  getDocentes():Observable<Docente[]> {
+  getDocentes(nombre:string):Observable<Docente[]> {
+
+    if(nombre!=''){
+      return this.http.get(API_URL+'docentes/porNombre/'+nombre)
+    .pipe(map(res => res.json()));
+    }
     return this.http.get(API_URL+'docentes')
     .pipe(map(res => res.json()));
   }
@@ -32,5 +37,4 @@ export class DocenteServicioService {
     return this.http.post(API_URL + 'docentes/',docente
     ).pipe(map(res => res.json().data));
   }
-
 }

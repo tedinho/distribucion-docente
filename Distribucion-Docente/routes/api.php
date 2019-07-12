@@ -17,7 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('docentes/porNombre/{nombre}', 'DocenteController@buscarPorNombre')->name('docente.buscarPorNombre');
 Route::resource('docentes', 'DocenteController');
+
 
 Route::resource('parametros', 'ParametroController');
 

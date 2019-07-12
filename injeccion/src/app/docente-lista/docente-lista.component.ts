@@ -10,23 +10,29 @@ import { first } from 'rxjs/operators';
 })
 export class DocenteListaComponent implements OnInit {
 
-  docentesa:Docente[];
-  errorMessage:string;
-
-  constructor(private docenteServicio:DocenteServicioService) { }
+  docentesa: Docente[];
+  errorMessage: string;
+  txtNombre: string;
+  modificado: any;
+  constructor(private docenteServicio: DocenteServicioService) { }
 
   ngOnInit() {
+    this.txtNombre = "Juan";
     this.getDocentes();
   }
 
-  getDocentes(){
+  getDocentes() {
     this.docenteServicio
-    .getDocentes()
-    .pipe(first())
-    .subscribe(
-      docentes => {this.docentesa = docentes; console.log(docentes)},
-      error => this.errorMessage = <any>error
-    );
+      .getDocentes(this.txtNombre)
+      .pipe(first())
+      .subscribe(
+        docentes => { this.docentesa = docentes; console.log(docentes) },
+        error => this.errorMessage = <any>error
+      );
+  }
+
+  buscar(){
+    this.getDocentes();
   }
 
 }

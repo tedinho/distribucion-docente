@@ -20,6 +20,13 @@ class DocenteController extends Controller
     public function index(\App\Docente $post)
     {
         return $post->all();
+        //BUSCADOR POR ID
+        $posts = Post::search(Input::get('search'))->orderBy('id', 'nombre1')->paginate(6);
+        return view('posts', ['posts' => $posts]);
+    }
+
+    public function buscarPorNombre($nombre='Juan'){
+        return $this->post->where('nombre1', 'like', '%'.$nombre.'%')->get();
     }
 
     /**
