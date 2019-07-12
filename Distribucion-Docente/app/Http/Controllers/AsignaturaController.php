@@ -3,31 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Asignatura;
 
-use App\Paralelo;
-
-class ParaleloController extends Controller
+class AsignaturaController extends Controller
 {
 
-    public function __construct(\App\Paralelo $post)
+
+    public function __construct(\App\Asignatura $post)
     {
         $this->post = $post;
     }
-
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(\App\Paralelo $post)
+    public function index(\App\Asignatura $post)
     {
         return $post->all();
     }
 
-    public function buscarPorIdNivel($id)
+    public function buscarPorIdParalelo($id)
     {
-        return $this->post->where('niveles_id', $id)->get();
+        return $this->post->where('paralelos_id', $id)->get();
     }
 
     /**

@@ -30,3 +30,5 @@ Route::resource('niveles', 'NivelController');
 Route::get('paralelos/porNivel/{id}', 'ParaleloController@buscarPorIdNivel')->name('paralelo.buscarPorIdNivel');
 Route::resource('paralelos', 'ParaleloController');
 
+Route::get('asignaturas/porParalelo/{id}', 'AsignaturaController@buscarPorIdParalelo')->name('asignatura.buscarPorIdParalelo');
+Route::resource('asignaturas', 'AsignaturaController');
