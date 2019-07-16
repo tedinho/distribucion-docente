@@ -8,10 +8,11 @@ class Asignatura extends Model
 {
     protected $table = 'asignaturas';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'nombre', 'descripcion', 'horas_clase', 'paralelos_id'];
+    protected $fillable = ['id', 'nombre', 'descripcion', 'horas_clase', 'niveles_id'];
+    public $timestamps = false;
 
-    public function paralelo()
+    public function nivel()
     {
-        return $this->belongsTo(Paralelo::class,"paralelos_id");
+        return $this->belongsTo(Nivel::class,"niveles_id");
     }
 }

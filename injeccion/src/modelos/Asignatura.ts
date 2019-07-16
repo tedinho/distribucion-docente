@@ -1,10 +1,10 @@
 import { Paralelo } from './Paralelo';
 
-export interface Asignatura{
+export class Asignatura{
     id:number;
     nombre:string;
     descripcion:string;
     horas_clase:number;
-    paralelos_id:number;
+    niveles_id:number;
     paralelo:Paralelo;
 }

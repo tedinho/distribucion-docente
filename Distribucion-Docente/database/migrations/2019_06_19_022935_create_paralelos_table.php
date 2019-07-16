@@ -21,7 +21,6 @@ class CreateParalelosTable extends Migration
             $table->integer('niveles_id')->unsigned();
             $table->foreign('niveles_id')->references('id')->on('niveles');
             
-            
         });
     }
 

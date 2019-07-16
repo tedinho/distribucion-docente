@@ -16,7 +16,4 @@ class Paralelo extends Model
         return $this->belongsTo(Nivel::class, "niveles_id");
     }
 
-    public function asignaturas() { 
-        return $this->hasMany(Asignatura::class,"asignaturas_id"); 
-    }
 }

@@ -13,7 +13,7 @@ export class ParaleloServicioService {
 
   constructor(private http: Http) { }
 
-  getNivelesPorCarrera(id:number): Observable<Paralelo[]> {
+  getParalelosPorNivel(id:number): Observable<Paralelo[]> {
     return this.http.get(API_URL + 'paralelos/porNivel/'+id)
       .pipe(map(res => res.json()));
   }

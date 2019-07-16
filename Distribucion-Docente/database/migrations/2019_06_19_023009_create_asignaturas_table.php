@@ -20,8 +20,8 @@ class CreateAsignaturasTable extends Migration
             $table->double('horas_clase');
 
             //CLAVE FORANEA
-            $table->integer('paralelos_id')->unsigned();
-            $table->foreign('paralelos_id')->references('id')->on('paralelos');
+            $table->integer('niveles_id')->unsigned();
+            $table->foreign('niveles_id')->references('id')->on('niveles');
         });
     }
 

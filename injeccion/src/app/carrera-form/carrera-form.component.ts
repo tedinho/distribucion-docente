@@ -8,6 +8,7 @@ import { NivelServicioService } from '../servicio/nivel-servicio.service';
 import { Paralelo } from 'src/modelos/Paralelo';
 import { ParaleloServicioService } from '../servicio/paralelo-servicio.service';
 import { Asignatura } from 'src/modelos/Asignatura';
+import { AsignaturaServicioService } from '../servicio/asignatura-servicio.service';
 
 @Component({
   selector: 'app-carrera-form',
@@ -27,11 +28,11 @@ export class CarreraFormComponent implements OnInit {
   paralelos: Paralelo[];
   paralelosQuitar: Paralelo[];
   paralelo: Paralelo;
+  asignaturas: Asignatura[];
+  asignaturasQuitar: Asignatura[];
 
-  asignaturas:Asignatura[];
 
-
-  constructor(private carreraServicio: CarreraServicioService, private paraleloServicio: ParaleloServicioService, private nivelServicio: NivelServicioService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private carreraServicio: CarreraServicioService, private asignaturaServicio: AsignaturaServicioService, private nivelServicio: NivelServicioService, private paraleloServicio: ParaleloServicioService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.carrera = new Carrera;
@@ -47,6 +48,8 @@ export class CarreraFormComponent implements OnInit {
     this.nivelesQuitar = [];
     this.paralelos = [];
     this.paralelosQuitar = [];
+    this.asignaturas = [];
+    this.asignaturasQuitar = [];
   }
 
   getNiveles() {
@@ -120,11 +123,13 @@ export class CarreraFormComponent implements OnInit {
     }
   }
 
+
+  //inicio logica paralelos
   abrirPopParalelos(nivelSeleccionado: Nivel) {
     this.nivel = nivelSeleccionado;
     if (this.nivel.id != null) {
       this.paraleloServicio
-        .getNivelesPorCarrera(this.nivel.id)
+        .getParalelosPorNivel(this.nivel.id)
         .pipe(first())
         .subscribe(
           paralelos => { this.paralelos = paralelos },
@@ -213,6 +218,106 @@ export class CarreraFormComponent implements OnInit {
     }
 
   }
+
+  //fin logica paralelos
+
+  //inicio logica asignaturas
+
+  abrirPopAsignaturas(nivelSeleccionado: Nivel) {
+    this.nivel = nivelSeleccionado;
+    if (this.nivel.id != null) {
+      this.asignaturaServicio
+        .getAsignaturasPorIdNivel(this.nivel.id)
+        .pipe(first())
+        .subscribe(
+          asignaturas => { this.asignaturas = asignaturas },
+          error => { this.errorMessage = <any>error }
+        );
+    }
+  }
+
+  agregarAsignatura() {
+    var asignatura: Asignatura = new Asignatura;
+    this.asignaturas.push(asignatura);
+    this.asignaturas.forEach(element => {
+      console.log(element.nombre);
+    });
+  }
+
+  quitarAsignatura(a: Asignatura) {
+    if (a.id != null) {
+      this.asignaturasQuitar.push(a);
+    }
+
+    const index: number = this.asignaturas.indexOf(a);
+    if (index !== -1) {
+      this.asignaturas.splice(index, 1);
+    }
+  }
+
+  cerrarPopAsignaturas() {
+    this.nivel = null;
+    this.asignaturas = [];
+  }
+
+  guardarAsignaturas() {
+    console.log("entro");
+    if (this.carrera.id == null) {
+      this.carreraServicio
+        .guardarCarrera(this.carrera)
+        .pipe(first())
+        .subscribe(
+          carrera => {
+            this.id = carrera.id;
+            this.carrera.id = this.id;
+            console.log(carrera.id);
+            this.nivel.carreras_id = carrera.id;
+            this.nivelServicio
+              .guardarNivel(this.nivel)
+              .pipe(first())
+              .subscribe(
+                nivel => {
+                  const index: number = this.niveles.indexOf(this.nivel);
+                  if (index !== -1) {
+                    this.niveles[index].id = nivel.id;
+                  }
+                  this.asignaturaServicio
+                    .guardarLote(this.asignaturas, nivel.id);
+                  this.asignaturaServicio
+                    .borrarLote(this.asignaturasQuitar);
+                  this.cerrarPopAsignaturas();
+                }
+              );
+          }
+        );
+    } else if (this.nivel.id == null) {
+      this.nivel.carreras_id = this.carrera.id;
+      this.nivelServicio
+        .guardarNivel(this.nivel)
+        .subscribe(
+          nivel => {
+            const index: number = this.niveles.indexOf(this.nivel);
+            if (index !== -1) {
+              this.niveles[index].id = nivel.id;
+            }
+            this.asignaturaServicio
+              .guardarLote(this.asignaturas, nivel.id);
+            this.asignaturaServicio
+              .borrarLote(this.asignaturasQuitar);
+            this.cerrarPopAsignaturas();
+          }
+        );
+    } else {
+      this.asignaturaServicio
+        .guardarLote(this.asignaturas, this.nivel.id);
+      this.asignaturaServicio
+        .borrarLote(this.asignaturasQuitar);
+      this.cerrarPopAsignaturas();
+    }
+
+  }
+
+  //fin logica asignaturas
 
 
 }

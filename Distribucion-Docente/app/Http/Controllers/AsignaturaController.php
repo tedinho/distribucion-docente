@@ -24,9 +24,9 @@ class AsignaturaController extends Controller
         return $post->all();
     }
 
-    public function buscarPorIdParalelo($id)
+    public function buscarPorIdNivel($id)
     {
-        return $this->post->where('paralelos_id', $id)->get();
+        return $this->post->where('niveles_id', $id)->get();
     }
 
     /**

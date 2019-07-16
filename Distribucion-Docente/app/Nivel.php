@@ -19,4 +19,8 @@ class Nivel extends Model
     public function paralelos() { 
         return $this->hasMany(Paralelo::class,"niveles_id"); 
     }
+
+    public function asignaturas() { 
+        return $this->hasMany(Asignatura::class,"asignaturas_id"); 
+    }
 }
