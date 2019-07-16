@@ -1,32 +1,34 @@
 <div class="w3-container">
     <h1>Carreras</h1>
     <button title="Editar" [routerLink]="['/carrera-form']" class="w3-btn w3-round w3-blue botonCrear">
-      <i class="fa fa-plus" aria-hidden="true"> </i> Crear 
+        <i class="fa fa-plus" aria-hidden="true"> </i> Crear
     </button>
-  
+
     <div>
-            <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
-      <table class="w3-table-all w3-hoverable">
-          <thead>
-              <tr>
-                  <th class="w3-center">Nombre Carrera</th>
-                  <th class="w3-center">Descripcion</th>
-                  <th class="w3-center">Opción</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let c of carreras">
-                  <td class="w3-center"> {{ c.nombre }}</td>
-                  <td class="w3-center">{{ c.descripcion }}</td>
-                  
-                  <td class="w3-center">
-                      <button title="Editar" [routerLink]="['/carrera-form']" [queryParams]="{id : c.id}" class="w3-btn w3-blue">
-                        <i class="fa fa-pencil" aria-hidden="true"> </i> 
-                      </button>
-                  </td>
-              </tr>
-          </tbody>
-      </table>
+        <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr>
+                    <th class="w3-center">#</th>
+                    <th class="w3-center">Nombre Carrera</th>
+                    <th class="w3-center">Descripcion</th>
+                    <th class="w3-center">Opción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of carreras">
+                    <td class="w3-center"> {{carreras.indexOf(c)+1}} </td>
+                    <td class="w3-center"> {{ c.nombre }}</td>
+                    <td class="w3-center">{{ c.descripcion }}</td>
+
+                    <td class="w3-center">
+                        <button title="Editar" [routerLink]="['/carrera-form']" [queryParams]="{id : c.id}"
+                            class="w3-btn w3-blue">
+                            <i class="fa fa-pencil" aria-hidden="true"> </i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    </div>
-  
+</div>

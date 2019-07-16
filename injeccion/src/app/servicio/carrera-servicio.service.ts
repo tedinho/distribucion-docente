@@ -24,7 +24,7 @@ export class CarreraServicioService {
   }
 
   actualizarCarrera(carrera, id) {
-    return this.http.patch(API_URL + 'carreras/' + id, carrera
+    return this.http.put(API_URL + 'carreras/' + id, carrera
     ).pipe(map(res => res.json()));
   }
 

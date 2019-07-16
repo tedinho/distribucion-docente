@@ -11,7 +11,7 @@
         <div style="max-width: 40%">
             <label>Nombre Carrera</label>
             <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre" required="true"
-                [(ngModel)]="carrera.nombre" [ngModelOptions]="{standalone: true}" />
+                [(ngModel)]="carrera.nombre" [ngModelOptions]="{standalone: true}"/>
             <br />
             <label>Descripcion</label>
             <input type="text" class="w3-input w3-border w3-round-large" id="txtDescripccion"
@@ -39,19 +39,19 @@
                         </td>
 
                         <td class="w3-center">
-                            <button type="button" title="Eliminar" class="w3-btn w3-round w3-teal"
-                                (click)="quitarNivel(n);">
-                                <i class="fa fa-minus" aria-hidden="true"> </i>
-                            </button>
                             <button onclick="document.getElementById('popParalelos').style.display='block'"
-                                style="margin-left: 3px;" (click)="abrirPopParalelos(n);" type="button"
-                                title="Paralelos" class="w3-btn w3-round w3-teal">
+                                (click)="abrirPopParalelos(n);" type="button" title="Paralelos"
+                                class="w3-btn w3-round w3-teal">
                                 <i class="fa fa-list" aria-hidden="true"> </i>
                             </button>
                             <button onclick="document.getElementById('popAsignaturas').style.display='block'"
                                 style="margin-left: 3px;" (click)="abrirPopAsignaturas(n);" type="button"
                                 title="Asignatura" class="w3-btn w3-round w3-teal">
-                                <i class="fa fa-cogs" aria-hidden="true"> </i>
+                                <i class="fa fa-book" aria-hidden="true"> </i>
+                            </button>
+                            <button type="button" title="Eliminar" class="w3-btn w3-round w3-teal"
+                                (click)="quitarNivel(n);" style="margin-left: 3px;">
+                                <i class="fa fa-minus" aria-hidden="true"> </i>
                             </button>
                         </td>
                     </tr>
@@ -67,12 +67,12 @@
                     <header class="w3-container w3-teal">
                         <span onclick="document.getElementById('popAsignaturas').style.display='none'"
                             (click)="cerrarPopAsignaturas();" class="w3-button w3-display-topright">&times;</span>
-                        <h2 *ngIf="nivel!=null">{{ nivel.nombre }}</h2>
+                        <h2 *ngIf="nivel!=null">Nivel: {{ nivel.nombre }}</h2>
                     </header>
                     <br />
                     <div class="w3-container">
 
-                            <button style="width: 200px;" type="button" class="boton-guardar w3-btn w3-round"
+                        <button style="width: 200px;" type="button" class="boton-guardar w3-btn w3-round"
                             (click)="agregarAsignatura();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar
                             Asignatura</button>
                         <br />
@@ -94,14 +94,13 @@
                                             [ngModelOptions]="{standalone: true}" />
                                     </td>
                                     <td class="w3-center">
-                                        <input type="text" class="w3-input w3-border w3-round-large"
-                                            id="txtHorasClase" required="true" [(ngModel)]="a.horas_clase"
+                                        <input type="text" class="w3-input w3-border w3-round-large" id="txtHorasClase"
+                                            required="true" [(ngModel)]="a.horas_clase"
                                             [ngModelOptions]="{standalone: true}" />
                                     </td>
                                     <td class="w3-center">
-                                        <input type="text" class="w3-input w3-border w3-round-large"
-                                            id="txtDescripcion" [(ngModel)]="a.descripcion"
-                                            [ngModelOptions]="{standalone: true}" />
+                                        <input type="text" class="w3-input w3-border w3-round-large" id="txtDescripcion"
+                                            [(ngModel)]="a.descripcion" [ngModelOptions]="{standalone: true}" />
                                     </td>
 
                                     <td class="w3-center">
@@ -119,7 +118,7 @@
                             class="boton-guardar w3-btn w3-round">Guardar Asignaturas</button>
                         <br />
                         <br />
-                        
+
                     </div>
                 </div>
 
@@ -132,7 +131,7 @@
                     <header class="w3-container w3-teal">
                         <span onclick="document.getElementById('popParalelos').style.display='none'"
                             (click)="cerrarPopParalelos();" class="w3-button w3-display-topright">&times;</span>
-                        <h2 *ngIf="nivel!=null">{{ nivel.nombre }}</h2>
+                        <h2 *ngIf="nivel!=null">Nivel: {{ nivel.nombre }}</h2>
                     </header>
                     <br />
                     <div class="w3-container">
