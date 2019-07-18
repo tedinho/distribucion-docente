@@ -16,32 +16,37 @@
         <i class="fa fa-search" (clic)="activar()"> </i> Buscar</button></div>
   </div>
   <br />
-  
-    <div>
-      <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
-      <table class="w3-table-all w3-hoverable">
-        <thead>
-          <tr>
-            <th class="w3-center">Nombre</th>
-            <th class="w3-center">Correo</th>
-            <th class="w3-center">Tipo Contrato</th>
-            <th class="w3-center">Opcion</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let d of docentesa | paginate: { itemsPerPage: 10, currentPage: pageDocentes }">
-            <td class="w3-center"> {{ d.nombre1 }} {{ d.apellido1 }}</td>
-            <td class="w3-center">{{ d.correo }}</td>
-            <td class="w3-center">{{ d.tipo_contrato }}</td>
-            <td class="w3-center">
-              <button title="Editar" [routerLink]="['/docente-form']" [queryParams]="{id : d.id}"
-                class="w3-btn w3-blue">
-                <i class="fa fa-pencil" aria-hidden="true"> </i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <pagination-controls (pageChange)="pageDocentes = $event"></pagination-controls>
+
+  <div *ngIf="docentesa!=null&&docentesa.length!=0">
+    <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
+    <table class="w3-table-all w3-hoverable">
+      <thead>
+        <tr>
+          <th class="w3-center">Nombre</th>
+          <th class="w3-center">Correo</th>
+          <th class="w3-center">Tipo Contrato</th>
+          <th class="w3-center">Opcion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of docentesa | paginate: { itemsPerPage: 10, currentPage: pageDocentes }">
+          <td class="w3-center"> {{ d.nombre1 }} {{ d.apellido1 }}</td>
+          <td class="w3-center">{{ d.correo }}</td>
+          <td class="w3-center">{{ d.tipo_contrato }}</td>
+          <td class="w3-center">
+            <button title="Editar" [routerLink]="['/docente-form']" [queryParams]="{id : d.id}" class="w3-btn w3-blue">
+              <i class="fa fa-pencil" aria-hidden="true"> </i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="pageDocentes = $event"></pagination-controls>
+  </div>
+  <div *ngIf="docentesa==null||docentesa.length==0">
+
+    <div class="w3-teal w3-hover-shadow w3-center">
+      <p>No existen registros</p>
     </div>
+  </div>
 </div>

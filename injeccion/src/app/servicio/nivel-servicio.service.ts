@@ -35,6 +35,10 @@ export class NivelServicioService {
 
   eliminarLote(niveles:Nivel[]){
     niveles.forEach(nivel => {
+      //en el servicio de paralelos y asignaturas ya existe metodos
+      //llamar el metodo de asig por niveln y poner en lista
+      //llamar metodo de para por nivel y poner en lista
+      //si las listas son vacias no hacer nada caso contrario enviar a eliminar la lista completa
       this.eliminarNivel(nivel).subscribe(nivel=>{});
     });
   }
