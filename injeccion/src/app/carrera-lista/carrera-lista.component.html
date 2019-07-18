@@ -3,7 +3,18 @@
     <button title="Editar" [routerLink]="['/carrera-form']" class="w3-btn w3-round w3-blue botonCrear">
         <i class="fa fa-plus" aria-hidden="true"> </i> Crear
     </button>
+    <legend>Búsqueda:</legend>
 
+    <div class="w3-row">
+      <div class="w3-col m4 l3">
+        <input type="text" maxlength="10" class="form-control" placeholder="Ingrese una Carrera" size="20"
+          style="font-family: Arial; font-size: 20px" [(ngModel)]="txtNombre" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="w3-col m8 l9">
+        <button title="Buscar" class="w3-btn w3-round w3-blue" (click)="buscar();">
+          <i class="fa fa-search" aria-hidden="true"> </i> Buscar</button></div>
+    </div>
+    <br />
     <div>
         <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
         <table class="w3-table-all w3-hoverable">
@@ -16,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let c of carreras">
+                <tr *ngFor="let c of carreras | paginate: { itemsPerPage: 10, currentPage: pageCarrera}">
                     <td class="w3-center"> {{carreras.indexOf(c)+1}} </td>
                     <td class="w3-center"> {{ c.nombre }}</td>
                     <td class="w3-center">{{ c.descripcion }}</td>
@@ -30,5 +41,6 @@
                 </tr>
             </tbody>
         </table>
+        <pagination-controls (pageChange)="pageDocentes = $event"></pagination-controls>
     </div>
 </div>

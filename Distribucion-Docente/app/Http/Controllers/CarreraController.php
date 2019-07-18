@@ -11,6 +11,11 @@ class CarreraController extends Controller
     {
         $this->post=$post;
     }
+    
+    public function buscarPorNombre($nombre='Turismo'){
+        return $this->post->where('nombre', 'like', '%'.$nombre.'%')->get();
+    }
+
     /**
      * Display a listing of the resource.
      *

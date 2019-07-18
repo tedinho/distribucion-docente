@@ -14,6 +14,7 @@ export class DocenteListaComponent implements OnInit {
   errorMessage: string;
   txtNombre: string;
   modificado: any;
+  
   constructor(private docenteServicio: DocenteServicioService) { }
 
   ngOnInit() {
@@ -34,5 +35,4 @@ export class DocenteListaComponent implements OnInit {
   buscar(){
     this.getDocentes();
   }
-
 }

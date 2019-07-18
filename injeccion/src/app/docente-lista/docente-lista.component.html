@@ -12,10 +12,11 @@
         style="font-family: Arial; font-size: 20px" [(ngModel)]="txtNombre" [ngModelOptions]="{standalone: true}">
     </div>
     <div class="w3-col m8 l9">
-      <button title="Buscar" class="w3-btn w3-round w3-blue" (click)="buscar();">
-        <i class="fa fa-search" aria-hidden="true"> </i> Buscar</button></div>
+      <button title="Buscar" class="w3-btn w3-round w3-blue" (click)="buscar();" aria-hidden="true">
+        <i class="fa fa-search" (clic)="activar()"> </i> Buscar</button></div>
   </div>
   <br />
+  
     <div>
       <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
       <table class="w3-table-all w3-hoverable">

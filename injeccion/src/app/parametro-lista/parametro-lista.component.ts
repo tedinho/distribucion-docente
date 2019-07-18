@@ -14,6 +14,7 @@ export class ParametroListaComponent implements OnInit {
   parametros:Parametro[];
   errorMessage:string;
   pageParametros: number = 1;
+  txtValor: string;
   constructor(private parametroServicio:ParametroService) { }
 
   ngOnInit() {
@@ -21,13 +22,17 @@ export class ParametroListaComponent implements OnInit {
   }
 
   getParametros(){
+    this.txtValor = "";
     this.parametroServicio
-    .getParametros()
+    .getParametros(this.txtValor)
     .pipe(first())
     .subscribe(
         parametros => this.parametros = parametros,
         error => this.errorMessage = <any>error
     );
+  }
+  buscar(){
+    this.getParametros();
   }
 
 

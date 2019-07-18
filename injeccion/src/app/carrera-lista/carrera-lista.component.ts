@@ -12,20 +12,25 @@ export class CarreraListaComponent implements OnInit {
 
   carreras:Carrera[];
   errorMessage:string;
+  txtNombre: string;
 
   constructor(private carreraServicio:CarreraServicioService) { }
 
   ngOnInit() {
+    this.txtNombre = "";
     this.getCarreras();
   }
 
   getCarreras(){
     this.carreraServicio
-    .getCarreras()
+    .getCarreras(this.txtNombre)
     .pipe(first())
     .subscribe(
       carreras => this.carreras = carreras,
       error => this.errorMessage = <any>error
     );
+}
+buscar(){
+  this.getCarreras();
 }
 }

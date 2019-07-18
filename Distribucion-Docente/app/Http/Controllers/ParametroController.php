@@ -21,6 +21,10 @@ class ParametroController extends Controller
     {
         return $post->all();
     }
+     
+    public function buscarPorValor($nombre='Horas'){
+        return $this->post->where('valor', 'like', '%'.$nombre.'%')->get();
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -1,6 +1,18 @@
 <div class="w3-container">
 <h1>Administración de Parametros</h1>
 <br />
+<legend>Búsqueda:</legend>
+
+  <div class="w3-row">
+    <div class="w3-col m4 l3">
+      <input type="text" maxlength="10" class="form-control" placeholder="Ingrese un Valor" size="20"
+        style="font-family: Arial; font-size: 20px" [(ngModel)]="txtNombre" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="w3-col m8 l9">
+      <button title="Buscar" class="w3-btn w3-round w3-blue" (click)="buscar();">
+        <i class="fa fa-search" aria-hidden="true"> </i> Buscar</button></div>
+  </div>
+  <br />
 <div>
         <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
   <table class="w3-table-all w3-hoverable">

@@ -13,9 +13,14 @@ export class CarreraServicioService {
 
   constructor(private http: Http) { }
 
-  getCarreras(): Observable<Carrera[]> {
-    return this.http.get(API_URL + 'carreras')
-      .pipe(map(res => res.json()));
+  getCarreras(nombre:string): Observable<Carrera[]> {
+    
+    if(nombre!=''){
+      return this.http.get(API_URL+'carreras/porNombre/'+nombre)
+    .pipe(map(res => res.json()));
+    }
+    return this.http.get(API_URL+'carreras')
+    .pipe(map(res => res.json()));
   }
 
   buscarCarrera(llave: number): Observable<Carrera> {

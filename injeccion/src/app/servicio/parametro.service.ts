@@ -16,7 +16,11 @@ export class ParametroService {
     
   }
 
-getParametros():Observable<Parametro[]> {
+getParametros(valor:string):Observable<Parametro[]> {
+  if(valor!=''){
+    return this.http.get(API_URL+'parametros/porValor/'+valor)
+  .pipe(map(res => res.json()));
+  }
   return this.http.get(API_URL+'parametros')
   .pipe(map(res => res.json()));
 }
