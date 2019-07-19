@@ -39,3 +39,7 @@ Route::resource('asignaturas', 'AsignaturaController');
 Route::get('docenteCarrera/buscarPorIdDocente/{id}', 'DocenteCarreraController@buscarPorIdDocente')->name('docentecarrera.buscarPorIdDocente');
 Route::post('docenteCarrera/crearPorIdDocente/{id}', 'DocenteCarreraController@crearPorIdDocente')->name('docentecarrera.crearPorIdDocente');
 Route::delete('docenteCarrera/eliminarPorIdDocenteCarrera/{idDocente}/{idCarrera}', 'DocenteCarreraController@eliminarPorIdDocenteCarrera')->name('docentecarrera.eliminarPorIdDocenteCarrera');
+
+
+Route::resource('periodos', 'PeriodoController');
+Route::get('periodos/buscarPorPeriodo/{periodo}', 'PeriodoController@buscarPorPeriodo')->name('periodos.buscarPorPeriodo');

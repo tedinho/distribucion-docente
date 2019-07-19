@@ -1,0 +1,12 @@
+.botonCrear{
+    width: 200px;
+    position: absolute;
+    margin-left: 83%;
+    margin-top: -50px;
+  }
+  .botonBuscar{
+    position: absolute;
+    top: 148px;
+    left: 17%;
+
+  }

@@ -16,6 +16,8 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 //dependencias externas
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PeriodoListaComponent } from './periodo-lista/periodo-lista.component';
+import { PeriodoFormComponent } from './periodo-form/periodo-form.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
   { path: 'docente-form' , component: DocenteFormComponent },
   { path: 'carrera-form' , component: CarreraFormComponent },
   { path: 'carrera-lista' , component: CarreraListaComponent },
+  { path: 'periodo-lista' , component: PeriodoListaComponent },
+  { path: 'periodo-form' , component: PeriodoFormComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
@@ -36,7 +40,9 @@ const routes: Routes = [
     DocenteListaComponent,
     DocenteFormComponent,
     CarreraFormComponent,
-    CarreraListaComponent
+    CarreraListaComponent,
+    PeriodoListaComponent,
+    PeriodoFormComponent
   ],
   imports: [
     BrowserModule,

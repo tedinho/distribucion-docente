@@ -1,0 +1,28 @@
+<style>
+    .boton-guardar {
+        width: 100%;
+        color: #fff;
+        background: #009688;
+    }
+</style>
+<form #periodoForm="ngForm">
+    <div class="field" class="w3-container">
+        <div class="w3-row">
+            <div class="w3-half w3-container">
+                <h1><span *ngIf="periodo.id==null">Nuevo</span> Periodo</h1>
+                <div>
+                    <label>Periodo</label>
+                    <input type="text" class="w3-input w3-border w3-round-large" id="txtPeriodo" required="true"
+                        [(ngModel)]="periodo.periodo" [ngModelOptions]="{standalone: true}" />
+                    <br />
+                    <br />
+
+                </div>
+                <br />
+                <br />
+                <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
+            </div>
+        </div>
+
+    </div>
+</form>
