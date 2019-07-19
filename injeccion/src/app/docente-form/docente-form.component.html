@@ -1,45 +1,100 @@
 <style>
-  .boton-guardar{
-      width: 100%;color: #fff;background: #009688;
+  .boton-guardar {
+    width: 100%;
+    color: #fff;
+    background: #009688;
   }
-  </style>
-  <form #parametroForm="ngForm">
+</style>
+<form #parametroForm="ngForm">
   <div class="field" class="w3-container">
-      <h1>Docente</h1>
-      <div style="max-width: 40%">
-              <label>Primer Nombre</label>
-              <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre1" required="true"
-              [(ngModel)]="docente.nombre1" [ngModelOptions]="{standalone: true}"/>
-              <br />
-              <label>Segundo Nombre</label>
-              <input type="text" class="w3-input w3-border w3-round-large" id="txtNOmbre2"
-              [(ngModel)]="docente.nombre2" [ngModelOptions]="{standalone: true}"/>
-              <br />
-              <label>Primer Apellido</label>
-              <input type="text" class="w3-input w3-border w3-round-large" id="txtApellido1" required="true"
-              [(ngModel)]="docente.apellido1" [ngModelOptions]="{standalone: true}"/>
-              <br />
-              <label>Segundo Apellido</label>
-              <input type="text" class="w3-input w3-border w3-round-large" id="txtApellido2"
-              [(ngModel)]="docente.apellido2" [ngModelOptions]="{standalone: true}"/>
-              <br />
-              <label>Cedula</label>
-              <input type="text" class="w3-input w3-border w3-round-large" id="txtCedula"
-              [(ngModel)]="docente.cedula" [ngModelOptions]="{standalone: true}"/>
-              <br />
-              <label>Correo</label>
-              <input type="text" class="w3-input w3-border w3-round-large" id="txtCorreo"
-              [(ngModel)]="docente.correo" [ngModelOptions]="{standalone: true}"/>
-              <br />
-              <label>Tipo Contrato</label>
-              <select class="w3-select w3-border" name="repeatSelect" id="repeatSelect" [(ngModel)]="docente.tipo_contrato">
-                <option value="" disabled selected>Seleccionar</option>
-                <option value="Medio Tiempo">Medio Tiempo</option>
-                <option value="Tiempo Completo">Tiempo Completo</option>
-              </select>
-              <br />
-              <br />  
-              <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
+    <div class="w3-row">
+      <div class="w3-half w3-container">
+        <h1><span *ngIf="docente.id==null">Nuevo</span> Docente</h1>
+        <div>
+          <label>Primer Nombre</label>
+          <input type="text" class="w3-input w3-border w3-round-large" id="txtNombre1" required="true"
+            [(ngModel)]="docente.nombre1" [ngModelOptions]="{standalone: true}" />
+          <br />
+          <label>Segundo Nombre</label>
+          <input type="text" class="w3-input w3-border w3-round-large" id="txtNOmbre2" [(ngModel)]="docente.nombre2"
+            [ngModelOptions]="{standalone: true}" />
+          <br />
+          <label>Primer Apellido</label>
+          <input type="text" class="w3-input w3-border w3-round-large" id="txtApellido1" required="true"
+            [(ngModel)]="docente.apellido1" [ngModelOptions]="{standalone: true}" />
+          <br />
+          <label>Segundo Apellido</label>
+          <input type="text" class="w3-input w3-border w3-round-large" id="txtApellido2" [(ngModel)]="docente.apellido2"
+            [ngModelOptions]="{standalone: true}" />
+          <br />
+          <label>Cedula</label>
+          <input type="text" class="w3-input w3-border w3-round-large" id="txtCedula" [(ngModel)]="docente.cedula"
+            [ngModelOptions]="{standalone: true}" />
+          <br />
+          <label>Correo</label>
+          <input type="text" class="w3-input w3-border w3-round-large" id="txtCorreo" [(ngModel)]="docente.correo"
+            [ngModelOptions]="{standalone: true}" />
+          <br />
+          <label>Tipo de contrato</label>
+
+          <select class="w3-select w3-border" [(ngModel)]="docente.tipo_contrato" [ngModelOptions]="{standalone: true}"
+            (change)="cambiarContrato($event)">
+            <option value="" disabled>- Seleccionar -</option>
+            <option *ngFor="let a of tipoContratoItem" [value]="a">{{a}}</option>
+          </select>
+          <br />
+
+        </div>
       </div>
+      <div class="w3-half w3-container">
+        <h1>Carreras del Docente</h1>
+
+        <label>Escriba una parte del nombre de la carera que desea seleccionar:</label>
+
+        <ng-autocomplete [data]="carreras" [searchKeyword]="keyword" [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate" (selected)='agregarCarrera($event)'> 
+        </ng-autocomplete>
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.nombre"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
+
+        <br />
+        
+        <div *ngIf="errorMessage!=''" class="w3-card w3-khaki">
+          <span class="help is-error">{{ errorMessage }}</span>
+          
+        </div>
+        <br />
+        <div *ngIf="carrerasDocente!=null&&carrerasDocente.length!=0">
+          <table class="w3-table-all w3-hoverable">
+            <thead>
+              <tr>
+                <th class="w3-center">Nombre</th>
+                <th class="w3-center">Opcion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of carrerasDocente">
+                <td class="w3-center"> {{ c.nombre }}</td>
+                <td class="w3-center">
+                  <button title="Quitar" class="w3-btn w3-blue" (click)="quitarCarrera(c);">
+                    <i class="fa fa-minus" aria-hidden="true"> </i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+    <br />
+    <br />
+    <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
   </div>
-  </form>
+</form>

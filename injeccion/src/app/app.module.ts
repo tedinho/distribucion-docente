@@ -12,6 +12,7 @@ import { DocenteListaComponent } from './docente-lista/docente-lista.component';
 import { DocenteFormComponent } from './docente-form/docente-form.component';
 import { CarreraListaComponent } from './carrera-lista/carrera-lista.component';
 import { CarreraFormComponent } from './carrera-form/carrera-form.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 //dependencias externas
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -45,6 +46,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
+    AutocompleteLibModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

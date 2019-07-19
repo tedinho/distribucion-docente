@@ -10,7 +10,7 @@ class DocenteController extends Controller
 
     public function __construct(\App\Docente $post)
     {
-        $this->post=$post;
+        $this->post = $post;
     }
     /**
      * Display a listing of the resource.
@@ -20,13 +20,11 @@ class DocenteController extends Controller
     public function index(\App\Docente $post)
     {
         return $post->all();
-        //BUSCADOR POR ID
-        $posts = Post::search(Input::get('search'))->orderBy('id', 'nombre1')->paginate(6);
-        return view('posts', ['posts' => $posts]);
     }
 
-    public function buscarPorNombre($nombre='Juan'){
-        return $this->post->where('nombre1', 'like', '%'.$nombre.'%')->get();
+    public function buscarPorNombre($nombre = 'Juan')
+    {
+        return $this->post->where('nombre1', 'like', '%' . $nombre . '%')->get();
     }
 
     /**
@@ -48,10 +46,7 @@ class DocenteController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $this->post->create($input);
-        return [
-            'state' => 'OK'
-        ];
+        return $this->post->create($input);
     }
 
     /**

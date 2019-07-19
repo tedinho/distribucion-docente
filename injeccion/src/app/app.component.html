@@ -1,11 +1,17 @@
 <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none;width: 350px;" id="mySidebar">
   <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom w3-border-top" [routerLink]="['/parametro-lista']"><i class="fa fa-list" aria-hidden="true"></i>
-    Administración de Parametros</button>
-  <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom" [routerLink]="['/docente-lista']"><i class="fa fa-users" aria-hidden="true"></i>
-    Administración de Docentes</button>
-  <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom" [routerLink]="['/carrera-lista']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-    Administración de Carreras</button>
+  <p class="w3-bar-item w3-large">Administración del Sistema</p>
+  <div class="w3-container">
+    <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom w3-border-top"
+      [routerLink]="['/parametro-lista']"><i class="fa fa-list" aria-hidden="true"></i>
+      Administración de Parametros</button>
+    <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom"
+      [routerLink]="['/carrera-lista']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      Administración de Carreras</button>
+    <button onclick="w3_close()" class="w3-bar-item w3-button w3-hover-blue w3-border-bottom"
+      [routerLink]="['/docente-lista']"><i class="fa fa-users" aria-hidden="true"></i>
+      Administración de Docentes</button>
+  </div>
 </div>
 <!-- Page Content -->
 <div class="w3-teal">
