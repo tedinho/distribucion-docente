@@ -8,6 +8,7 @@ export class Docente{
     correo:string;
     cedula:string;
     tipoContrato:string;
+    tipo_contrato:string="";
     
     getNombreApellido():string{
         return this.nombre1+" "+this.apellido1;        

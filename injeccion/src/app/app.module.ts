@@ -12,10 +12,16 @@ import { DocenteListaComponent } from './docente-lista/docente-lista.component';
 import { DocenteFormComponent } from './docente-form/docente-form.component';
 import { CarreraListaComponent } from './carrera-lista/carrera-lista.component';
 import { CarreraFormComponent } from './carrera-form/carrera-form.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 //dependencias externas
 import {NgxPaginationModule} from 'ngx-pagination';
+<<<<<<< HEAD
 import { TemplateDrivenFormsComponent } from './pages/template-driven-forms/template-driven-forms.component';
+=======
+import { PeriodoListaComponent } from './periodo-lista/periodo-lista.component';
+import { PeriodoFormComponent } from './periodo-form/periodo-form.component';
+>>>>>>> e8d055b34935f5ee2b8e2959b3a6d2b4594747ce
 
 
 const routes: Routes = [
@@ -25,6 +31,8 @@ const routes: Routes = [
   { path: 'docente-form' , component: DocenteFormComponent },
   { path: 'carrera-form' , component: CarreraFormComponent },
   { path: 'carrera-lista' , component: CarreraListaComponent },
+  { path: 'periodo-lista' , component: PeriodoListaComponent },
+  { path: 'periodo-form' , component: PeriodoFormComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
@@ -37,7 +45,12 @@ const routes: Routes = [
     DocenteFormComponent,
     CarreraFormComponent,
     CarreraListaComponent,
+<<<<<<< HEAD
     TemplateDrivenFormsComponent
+=======
+    PeriodoListaComponent,
+    PeriodoFormComponent
+>>>>>>> e8d055b34935f5ee2b8e2959b3a6d2b4594747ce
   ],
   imports: [
     BrowserModule,
@@ -47,6 +60,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
+    AutocompleteLibModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

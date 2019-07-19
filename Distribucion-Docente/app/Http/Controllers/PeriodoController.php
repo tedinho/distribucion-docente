@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Docente;
+use App\Periodo;
 
-class DocenteController extends Controller
+class PeriodoController extends Controller
 {
 
-    public function __construct(\App\Docente $post)
+    public function __construct(\App\Periodo $post)
     {
         $this->post = $post;
     }
@@ -17,14 +17,14 @@ class DocenteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(\App\Docente $post)
+    public function index(\App\Periodo $post)
     {
         return $post->all();
     }
 
-    public function buscarPorNombre($nombre = 'Juan')
+    public function buscarPorPeriodo($periodo)
     {
-        return $this->post->where('nombre1', 'like', '%' . $nombre . '%')->get();
+        return $this->post->where('periodo', 'like', '%' . $periodo . '%')->get();
     }
 
     /**

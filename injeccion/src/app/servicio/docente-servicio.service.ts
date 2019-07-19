@@ -30,11 +30,11 @@ export class DocenteServicioService {
 
   actualizarDocente(docente,id){
     return this.http.patch(API_URL + 'docentes/'+id,docente
-    ).pipe(map(res => res.json().data));
+    ).pipe(map(res => res.json()));
   }
 
   guardarDocente(docente){
     return this.http.post(API_URL + 'docentes/',docente
-    ).pipe(map(res => res.json().data));
+    ).pipe(map(res => res.json()));
   }
 }

@@ -1,0 +1,52 @@
+<div class="w3-container">
+    <h1>Periodos</h1>
+    <button title="Editar" [routerLink]="['/periodo-form']" class="w3-btn w3-round w3-blue botonCrear">
+        <i class="fa fa-plus" aria-hidden="true"> </i> Crear
+    </button>
+
+    <legend>Búsqueda:</legend>
+
+    <div class="w3-row">
+        <div class="w3-col m4 l3">
+            <input type="text" maxlength="10" class="form-control" placeholder="Ingrese un Periodo" size="20"
+                style="font-family: Arial; font-size: 20px" [(ngModel)]="txtFiltro"
+                [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="w3-col m8 l9">
+            <button title="Buscar" class="w3-btn w3-round w3-blue" (click)="buscar();" aria-hidden="true">
+                <i class="fa fa-search" (clic)="activar()"> </i> Buscar</button></div>
+    </div>
+    <br />
+
+    <div *ngIf="periodos!=null&&periodos.length!=0">
+        <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr>
+                    <th class="w3-center">#</th>
+                    <th class="w3-center">Periodo</th>
+                    <th class="w3-center">Opcion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of periodos | paginate: { itemsPerPage: 10, currentPage: pagePeriodos }">
+                    <td class="w3-center"> {{periodos.indexOf(p)+1}} </td>
+                    <td class="w3-center"> {{ p.periodo }} </td>
+                    <td class="w3-center">
+                        <button title="Editar" [routerLink]="['/periodo-form']" [queryParams]="{id : p.id}"
+                            class="w3-btn w3-blue">
+                            <i class="fa fa-pencil" aria-hidden="true"> </i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="pagePeriodos = $event"></pagination-controls>
+    </div>
+    <div *ngIf="periodos==null||periodos.length==0">
+
+        <div class="w3-teal w3-hover-shadow w3-center">
+            <p>No existen registros</p>
+        </div>
+    </div>
+</div>
