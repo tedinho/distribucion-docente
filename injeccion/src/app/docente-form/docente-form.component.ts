@@ -5,6 +5,8 @@ import { Docente } from 'src/modelos/Docente';
 import { first } from 'rxjs/operators';
 import { ConstanteContratos } from 'src/constantes/TipoContratoEnum';
 
+
+
 @Component({
   selector: 'app-docente-form',
   templateUrl: './docente-form.component.html',
@@ -17,8 +19,10 @@ export class DocenteFormComponent implements OnInit {
   errorMessage:string;
   tipoContratoItem:string[];
   pageDocentes: number= 1;
+  
 
-  constructor(private docenteServicio:DocenteServicioService, private route: ActivatedRoute,private router: Router) { }
+  constructor(private docenteServicio:DocenteServicioService, private route: ActivatedRoute,private router: Router) {
+}
 
   ngOnInit() {
       this.tipoContratoItem=ConstanteContratos.TIPOSCONTRATO;
@@ -28,6 +32,7 @@ export class DocenteFormComponent implements OnInit {
       this.id = params.id;
       if(this.id!=null){
       this.getDocente();
+
       }
     });
   }

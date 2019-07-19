@@ -9,6 +9,7 @@ import { Paralelo } from 'src/modelos/Paralelo';
 import { ParaleloServicioService } from '../servicio/paralelo-servicio.service';
 import { Asignatura } from 'src/modelos/Asignatura';
 import { AsignaturaServicioService } from '../servicio/asignatura-servicio.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-carrera-form',
@@ -30,10 +31,9 @@ export class CarreraFormComponent implements OnInit {
   paralelo: Paralelo;
   asignaturas: Asignatura[];
   asignaturasQuitar: Asignatura[];
-
-
+  form: FormGroup;
   constructor(private carreraServicio: CarreraServicioService, private asignaturaServicio: AsignaturaServicioService, private nivelServicio: NivelServicioService, private paraleloServicio: ParaleloServicioService, private route: ActivatedRoute, private router: Router) { }
-
+  
   ngOnInit() {
     this.carrera = new Carrera;
     this.route.queryParams
@@ -42,8 +42,9 @@ export class CarreraFormComponent implements OnInit {
         if (this.id != null) {
           this.getCarrera();
           this.getNiveles();
-        }
-      });
+     }    
+  });
+    
     this.niveles = [];
     this.nivelesQuitar = [];
     this.paralelos = [];
@@ -51,7 +52,7 @@ export class CarreraFormComponent implements OnInit {
     this.asignaturas = [];
     this.asignaturasQuitar = [];
   }
-
+  
   getNiveles() {
     this.nivelServicio
       .getNivelesPorCarrera(this.id)

@@ -17,7 +17,7 @@
     <br />
     <div>
         <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
-        <table class="w3-table-all w3-hoverable">
+        <table class="w3-table-all w3-hoverable" *ngIf="carreras!=null&&carreras.length!=0">
             <thead>
                 <tr>
                     <th class="w3-center">#</th>
@@ -43,4 +43,10 @@
         </table>
         <pagination-controls (pageChange)="pageDocentes = $event"></pagination-controls>
     </div>
+    <div *ngIf="carreras==null||carreras.length==0">
+
+        <div class="w3-teal w3-hover-shadow w3-center">
+          <p>No Existen Carreras</p>
+        </div>
+      </div>
 </div>

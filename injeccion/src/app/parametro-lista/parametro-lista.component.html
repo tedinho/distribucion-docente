@@ -15,7 +15,7 @@
   <br />
 <div>
         <span class="help is-error" *ngIf="errorMessage">{{ errorMessage }}</span>
-  <table class="w3-table-all w3-hoverable">
+  <table class="w3-table-all w3-hoverable" *ngIf="parametros!=null&&parametros.length!=0">
       <thead>
           <tr>
               <th class="w3-center">Id</th>
@@ -38,5 +38,11 @@
       </tbody>
   </table>
   <pagination-controls (pageChange)="pageParametros = $event"></pagination-controls>
+</div>
+<div *ngIf="parametros==null||parametros.length==0">
+
+  <div class="w3-teal w3-hover-shadow w3-center">
+    <p>No Existen Registros</p>
+  </div>
 </div>
 </div>

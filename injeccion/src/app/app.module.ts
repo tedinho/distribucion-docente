@@ -15,6 +15,7 @@ import { CarreraFormComponent } from './carrera-form/carrera-form.component';
 
 //dependencias externas
 import {NgxPaginationModule} from 'ngx-pagination';
+import { TemplateDrivenFormsComponent } from './pages/template-driven-forms/template-driven-forms.component';
 
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
     DocenteListaComponent,
     DocenteFormComponent,
     CarreraFormComponent,
-    CarreraListaComponent
+    CarreraListaComponent,
+    TemplateDrivenFormsComponent
   ],
   imports: [
     BrowserModule,
