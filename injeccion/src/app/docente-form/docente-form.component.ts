@@ -17,17 +17,6 @@ import { DocenteCarreraServicioService } from '../servicio/docente-carrera-servi
 })
 export class DocenteFormComponent implements OnInit {
 
-<<<<<<< HEAD
-  docente:Docente;
-  id:number;
-  errorMessage:string;
-  tipoContratoItem:string[];
-  pageDocentes: number= 1;
-  
-
-  constructor(private docenteServicio:DocenteServicioService, private route: ActivatedRoute,private router: Router) {
-}
-=======
   docente: Docente;
   keyword: string;
   id: number;
@@ -39,7 +28,6 @@ export class DocenteFormComponent implements OnInit {
   pageDocentes: number = 1;
 
   constructor(private docenteServicio: DocenteServicioService, private docenteCarreraServicio: DocenteCarreraServicioService, private carreraServicio: CarreraServicioService, private route: ActivatedRoute, private router: Router) { }
->>>>>>> e8d055b34935f5ee2b8e2959b3a6d2b4594747ce
 
   ngOnInit() {
     this.carrerasDocenteQuitar = [];
@@ -50,14 +38,6 @@ export class DocenteFormComponent implements OnInit {
     this.docente = new Docente;
     this.route.queryParams
       .subscribe(params => {
-<<<<<<< HEAD
-      this.id = params.id;
-      if(this.id!=null){
-      this.getDocente();
-
-      }
-    });
-=======
         this.id = params.id;
         if (this.id != null) {
           this.getDocente();
@@ -65,7 +45,6 @@ export class DocenteFormComponent implements OnInit {
         }
       });
     this.getCarreras();
->>>>>>> e8d055b34935f5ee2b8e2959b3a6d2b4594747ce
   }
 
   getCarrerasPorDocente() {
