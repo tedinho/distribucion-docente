@@ -16,5 +16,10 @@ class Docente extends Model
     {
         return $this->belongsToMany(Carrera::class, 'docentes_carreras', 'docentes_id', 'carreras_id');
     }
+
+    public function distribucion()
+    {
+        return $this->hasMany(DistribucionDocente::class, "docentes_id");
+    }
 }
 

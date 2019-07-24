@@ -3,6 +3,12 @@ import { PeriodoServicioService } from '../servicio/periodo-servicio.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PeriodoAcademico } from 'src/modelos/PeriodoAcademico';
 import { first } from 'rxjs/operators';
+import { Docente } from 'src/modelos/Docente';
+import { DistribucionDocenteServicioService } from '../servicio/distribucion-docente-servicio.service';
+
+import { DistribucionDocente } from 'src/modelos/DistribucionDocente';
+import { error } from 'util';
+import { DocenteServicioService } from '../servicio/docente-servicio.service';
 
 @Component({
   selector: 'app-periodo-form',
@@ -12,12 +18,22 @@ import { first } from 'rxjs/operators';
 export class PeriodoFormComponent implements OnInit {
 
   periodo: PeriodoAcademico;
+  distribucionesDocente: DistribucionDocente[];
+  mostrarDoc: boolean;
+  keywordDocente: string;
   errorMessage: string;
   id: number;
+  docentes: Docente[];
+  totalHoras: number;
 
-  constructor(private periodoServicio: PeriodoServicioService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private docenteServicio: DocenteServicioService, private distribucionServicio: DistribucionDocenteServicioService, private periodoServicio: PeriodoServicioService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.totalHoras = 0;
+    this.getDocentes();
+    this.mostrarDoc = false;
+    this.docentes = [];
+    this.keywordDocente = 'nombre1';
     this.periodo = new PeriodoAcademico;
     this.route.queryParams
       .subscribe(params => {
@@ -28,12 +44,41 @@ export class PeriodoFormComponent implements OnInit {
       });
   }
 
+  getDocentes() {
+    this.docenteServicio
+      .getDocentes('')
+      .pipe(first())
+      .subscribe(
+        docentes => this.docentes = docentes,
+        error => this.errorMessage = <any>error
+      );
+  }
+
   getPeriodo() {
     this.periodoServicio
       .buscarPeriodo(this.id)
       .pipe(first())
       .subscribe(
         periodo => this.periodo = periodo,
+        error => this.errorMessage = <any>error
+      );
+  }
+
+  cargarInformacionDocente(d) {
+    this.mostrarDoc = true;
+    this.distribucionServicio
+      .buscarPorIdDocente(d.id)
+      .pipe(first())
+      .subscribe(
+        distribuciones => {
+          this.distribucionesDocente = distribuciones;
+
+          this.distribucionesDocente.forEach(element => {
+            if (element.horas_clase != null) {
+              this.totalHoras = +this.totalHoras + +element.horas_clase;
+            }
+          });
+        },
         error => this.errorMessage = <any>error
       );
   }

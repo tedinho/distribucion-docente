@@ -43,3 +43,7 @@ Route::delete('docenteCarrera/eliminarPorIdDocenteCarrera/{idDocente}/{idCarrera
 
 Route::resource('periodos', 'PeriodoController');
 Route::get('periodos/buscarPorPeriodo/{periodo}', 'PeriodoController@buscarPorPeriodo')->name('periodos.buscarPorPeriodo');
+
+
+Route::resource('distribucion', 'DistribucionDocenteController');
+Route::get('distribucion/buscarPorIdDocente/{id}', 'DistribucionDocenteController@buscarPorIdDocente')->name('distribucion.buscarPorIdDocente');

@@ -26,7 +26,10 @@ class CreateDistribucionDocentesTable extends Migration
 
             $table->integer('periodos_academicos_id')->unsigned();
             $table->foreign('periodos_academicos_id')->references('id')->on('periodos_academicos');
-            $table->timestamps();
+   
+            $table->integer('paralelos_id')->unsigned();
+            $table->foreign('paralelos_id')->references('id')->on('paralelos');
+   
         });
     }
 
