@@ -36,15 +36,19 @@
                 </ng-template>
             </div>
             <div class="w3-half w3-container">
-                <h4 *ngIf='mostrarDoc'>Horas clases totales: {{ totalHoras }}</h4>
+                <h4 *ngIf='mostrarDoc'>Horas clases semanales a cumplir: {{ horasCumplir }}</h4>
+                <h4 *ngIf='mostrarDoc'>Horas clases semanales totales: {{ totalHoras }}</h4>
             </div>
         </div>
 
 
         <br />
         <div *ngIf='mostrarDoc' class="w3-container">
-            <button style="width: 150px;" type="button" class="boton-guardar w3-btn w3-round"
-                (click)="abrirPop();"><i class="fa fa-plus" aria-hidden="true"> </i> Agregar</button>
+            <button onclick="document.getElementById('popDistribucion').style.display='block'" style="width: 250px;"
+                type="button" class="boton-guardar w3-btn w3-round" (click)="abrirPopAgregar();"><i class="fa fa-plus"
+                    aria-hidden="true"> </i> Agregar Distribución</button>
+            <br />
+            <br />
             <table *ngIf='distribucionesDocente!=null&&distribucionesDocente.length!=0'
                 class="w3-table-all w3-hoverable">
                 <thead>
@@ -86,4 +90,107 @@
         <button type="button" class="boton-guardar w3-btn w3-round" (click)="guardar();">Guardar</button>
 
     </div>
+
+
+    <div id="popDistribucion" class="w3-modal">
+        <div class="w3-modal-content">
+            <div style="max-height: 400px; overflow-y: auto;">
+                <header class="w3-container w3-teal">
+                    <span onclick="document.getElementById('popDistribucion').style.display='none'"
+                        (click)="cerrarPopDistribucion();" class="w3-button w3-display-topright">&times;</span>
+                    <h2 *ngIf="periodo!=null">Periodo: {{ periodo.periodo }}</h2>
+                </header>
+                <br />
+                <div class="w3-container">
+                    <!--inicio de contenido-->
+                    <label>Escriba una parte del nombre de la carrera que desea seleccionar:</label>
+                    <div *ngIf='carrerasPorDocente!=null&&carrerasPorDocente.length!=0'>
+                        <ng-autocomplete [data]="carrerasPorDocente" [searchKeyword]="keywordCarrera"
+                            [itemTemplate]="itemTemplateCarrera" [notFoundTemplate]="notFoundTemplateCarrera"
+                            (selected)='cargarNivelesPorCarrera($event)'>
+                        </ng-autocomplete>
+                        <ng-template #itemTemplateCarrera let-item>
+                            <a [innerHTML]="item.nombre"></a>
+                        </ng-template>
+
+                        <ng-template #notFoundTemplateCarrera let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                        </ng-template>
+                    </div>
+                    <div *ngIf='carrerasPorDocente==null||carrerasPorDocente.length==0'>
+                        <h1 *ngIf='docenteSeleccionado!=null'>No existen carreras asignadas al docente
+                            {{docenteSeleccionado.nombre1}}</h1>
+                    </div>
+                    <br />
+
+
+                    <div class="w3-row">
+                        <div *ngIf='nivelesPorCarrera!=null&&nivelesPorCarrera.length!=0' class="w3-half w3-container">
+                            <label>Nivel</label>
+                            <select class="w3-select w3-border" [(ngModel)]="idNivel"
+                                [ngModelOptions]="{standalone: true}" (change)="cambiarNivel($event)">
+                                <option value="" disabled>- Seleccionar -</option>
+                                <option *ngFor="let a of nivelesPorCarrera" [value]="a.id">{{a.nombre}}</option>
+                            </select>
+                        </div>
+                        <div *ngIf='paralelosPorNivel!=null&&paralelosPorNivel.length!=0' class="w3-half w3-container">
+                            <label>Paralelo</label>
+                            <select class="w3-select w3-border" [(ngModel)]="idParalelo"
+                                [ngModelOptions]="{standalone: true}" (change)="cambiarParalelo($event)">
+                                <option value="" disabled>- Seleccionar -</option>
+                                <option *ngFor="let a of paralelosPorNivel" [value]="a.id">{{a.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="w3-container">
+
+                        <div *ngIf='asignaturasPorNivel!=null&&asignaturasPorNivel.length!=0'>
+                            <label>Asignatura</label>
+                            <ng-autocomplete [data]="asignaturasPorNivel" [searchKeyword]="keywordAsignatura"
+                                [itemTemplate]="itemTemplateAsignatura" [notFoundTemplate]="notFoundTemplateAsignatura"
+                                (selected)='seleccionarAsignatura($event)'>
+                            </ng-autocomplete>
+                            <ng-template #itemTemplateAsignatura let-item>
+                                <a [innerHTML]="item.nombre"></a>
+                            </ng-template>
+
+                            <ng-template #notFoundTemplateAsignatura let-notFound>
+                                <div [innerHTML]="notFound"></div>
+                            </ng-template>
+                        </div>
+                        <br />
+                        <div *ngIf='asignaturaSeleccionada!=null'>
+                            <label>Horas Clase</label>
+                            <input (input)="onSearchChange($event.target.value)" type="number"
+                                class="w3-input w3-border w3-round-large" id="txtHorasPop"
+                                [(ngModel)]="distribucion.horas_clase" [ngModelOptions]="{standalone: true}" required
+                                #horasPop="ngModel" />
+                            <div [hidden]="horasPop.valid || horasPop.pristine">
+                                <div *ngIf="horasPop.errors?.required" class="alert alert-danger">
+                                    <h6>*Este campo es Obligatorio.</h6>
+                                </div>
+                            </div>
+                            <div *ngIf="errorInputHoras!=null" class="alert alert-danger">
+                                <h6>{{errorInputHoras}}</h6>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- fin contenido -->
+                    <br />
+                    <button *ngIf='mostrarBotonAgregar' (click)="agregarDisctribucion();"
+                        onclick="document.getElementById('popDistribucion').style.display='none'" type="button"
+                        class="boton-guardar w3-btn w3-round">Agregar</button>
+                    <br />
+                    <br />
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </form>

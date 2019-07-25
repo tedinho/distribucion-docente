@@ -14,10 +14,10 @@ class DistribucionDocenteController extends Controller
         $this->post = $post;
     }
 
-    public function buscarPorIdDocente($id)
+    public function buscarPorIdDocente($id, $idPeriodo)
     {
         $distribucione =
-            $this->post->where('docentes_id', $id)->get();
+            $this->post->where('docentes_id', $id)->where('periodos_academicos_id', '=', $idPeriodo)->get();
 
         for ($i = 0; $i < count($distribucione); $i++) {
             $distribucione[$i]->docente;
@@ -25,7 +25,7 @@ class DistribucionDocenteController extends Controller
             $nivel = $asi->nivel;
             $nivel->carrera;
             $distribucione[$i]->periodo;
-            $distribucione[$i]->paralelo; 
+            $distribucione[$i]->paralelo;
         }
 
         return $distribucione;

@@ -80,7 +80,9 @@ export class DocenteFormComponent implements OnInit {
   }
 
   cambiarContrato(e) {
-    this.docente.tipo_contrato = e.target.value
+    this.docente.tipo_contrato = e.target.value;
+    this.docente.tipoContrato = e.target.value;
+    console.log(this.docente.tipoContrato + " " + this.docente.tipo_contrato);
   }
 
   agregarCarrera(e) {
@@ -101,8 +103,8 @@ export class DocenteFormComponent implements OnInit {
   }
 
   quitarCarrera(c) {
-    var pivot=c.pivot;
-    if(pivot!=null){
+    var pivot = c.pivot;
+    if (pivot != null) {
       this.carrerasDocenteQuitar.push(c);
     }
     const index: number = this.carrerasDocente.indexOf(c);
@@ -115,8 +117,8 @@ export class DocenteFormComponent implements OnInit {
     if (this.carrerasDocente.length != 0) {
       var ids = [];
       this.carrerasDocente.forEach(element => {
-        var pivot=element.pivot;
-        if(pivot==null){
+        var pivot = element.pivot;
+        if (pivot == null) {
           ids.push(element.id);
         }
       });

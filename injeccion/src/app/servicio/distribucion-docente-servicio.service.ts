@@ -13,8 +13,8 @@ export class DistribucionDocenteServicioService {
 
   constructor(private http: Http) { }
 
-  buscarPorIdDocente(id: number): Observable<DistribucionDocente[]> {
-    return this.http.get(API_URL + 'distribucion/buscarPorIdDocente/' + id)
+  buscarPorIdDocente(id: number, idPerido: number): Observable<DistribucionDocente[]> {
+    return this.http.get(API_URL + 'distribucion/buscarPorIdDocente/' + id + "/" + idPerido)
       .pipe(map(res => res.json()));
   }
 }

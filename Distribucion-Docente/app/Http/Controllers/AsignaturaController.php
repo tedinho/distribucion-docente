@@ -26,7 +26,13 @@ class AsignaturaController extends Controller
 
     public function buscarPorIdNivel($id)
     {
-        return $this->post->where('niveles_id', $id)->get();
+        $asignaturas = $this->post->where('niveles_id', $id)->get();
+
+        for ($i = 0; $i < count($asignaturas); $i++) {
+            $nivel = $asignaturas[$i]->nivel;
+            $nivel->carrera;
+        }
+        return $asignaturas;
     }
 
     /**

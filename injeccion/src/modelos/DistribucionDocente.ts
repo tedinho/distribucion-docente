@@ -13,4 +13,5 @@ export class DistribucionDocente {
     docente: Docente;
     periodo: PeriodoAcademico;
     paralelo: Paralelo;
+    paralelos_id: number;
 }
