@@ -22,10 +22,11 @@ export class AsignaturaServicioService {
     console.log("service");
     asignaturas.forEach(asignatura => {
       asignatura.niveles_id = id;
+      delete asignatura["nivel"];
       if (asignatura.id == null) {
         this.guardarAsignatura(asignatura).subscribe(asignatura => { console.log(asignatura) });
       } else {
-        this.actualizarAsignatura(asignatura, asignatura.id).subscribe(asignatura => { console.log(asignatura) });
+        this.actualizarAsignatura(asignatura, asignatura.id).subscribe(asignatura => { console.log(asignatura) }, error => console.log(error));
       }
     });
   }

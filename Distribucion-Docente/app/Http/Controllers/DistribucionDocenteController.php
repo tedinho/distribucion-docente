@@ -14,6 +14,13 @@ class DistribucionDocenteController extends Controller
         $this->post = $post;
     }
 
+    public function traerSumaHorasAsignaturaPeriodoYParalelo($idAsignatura, $idPeriodo, $idParalelo)
+    {
+        $distribucione =
+            $this->post->where('asignaturas_id', '=', $idAsignatura)->where('periodos_academicos_id', '=', $idPeriodo)->where('paralelos_id', '=', $idParalelo)->sum('horas_clase');
+        return $distribucione;
+    }
+
     public function buscarPorIdDocente($id, $idPeriodo)
     {
         $distribucione =

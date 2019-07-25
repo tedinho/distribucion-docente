@@ -72,14 +72,10 @@
           <br />
           <label>Correo</label>
           <input type="email" class="w3-input w3-border w3-round-large" id="txtCorreo" [(ngModel)]="docente.correo"
-            [ngModelOptions]="{standalone: true}" required [(ngModel)]="docente.correo" #correo="ngModel"
-            minlength="30" />
+            [ngModelOptions]="{standalone: true}" required [(ngModel)]="docente.correo" #correo="ngModel" />
           <div [hidden]="correo.valid || correo.pristine">
             <div *ngIf="correo.errors?.required" class="alert alert-danger">
               <h6>*Este campo es Obligatorio.</h6>
-            </div>
-            <div *ngIf="correo.errors?.minlength">
-              <h6>*Por lo menos 30 caracteres.</h6>
             </div>
           </div>
           <br />

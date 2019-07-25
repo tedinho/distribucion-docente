@@ -103,6 +103,12 @@
                 <br />
                 <div class="w3-container">
                     <!--inicio de contenido-->
+
+                    <div *ngIf='mostrarAviso' class="w3-panel w3-pale-yellow w3-border">
+                        <h3>Aviso!</h3>
+                        <p>El docente ya tiene asignadas todas sus horas clase</p>
+                    </div>
+
                     <label>Escriba una parte del nombre de la carrera que desea seleccionar:</label>
                     <div *ngIf='carrerasPorDocente!=null&&carrerasPorDocente.length!=0'>
                         <ng-autocomplete [data]="carrerasPorDocente" [searchKeyword]="keywordCarrera"
@@ -160,7 +166,8 @@
                             </ng-template>
                         </div>
                         <br />
-                        <div *ngIf='asignaturaSeleccionada!=null'>
+                        <div *ngIf='asignaturaSeleccionada!=null&&permitirHoras'>
+                            <p>Horas restantes: {{horasRestantes}}</p>
                             <label>Horas Clase</label>
                             <input (input)="onSearchChange($event.target.value)" type="number"
                                 class="w3-input w3-border w3-round-large" id="txtHorasPop"
@@ -177,11 +184,15 @@
                         </div>
                     </div>
 
+                    <div *ngIf='!permitirHoras' class="w3-panel w3-pale-red w3-border">
+                        <h3>Aviso!</h3>
+                        <p>Esta asignatura ya tiene asignado tiempo docente en su totalidad.</p>
+                    </div>
 
 
                     <!-- fin contenido -->
                     <br />
-                    <button *ngIf='mostrarBotonAgregar' (click)="agregarDisctribucion();"
+                    <button *ngIf='mostrarBotonAgregar&&permitirHoras' (click)="agregarDisctribucion();"
                         onclick="document.getElementById('popDistribucion').style.display='none'" type="button"
                         class="boton-guardar w3-btn w3-round">Agregar</button>
                     <br />

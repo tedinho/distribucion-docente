@@ -7,7 +7,6 @@ export class Docente{
     apellido2:string;
     correo:string;
     cedula:string;
-    tipoContrato:string;
     tipo_contrato:string="";
     
     getNombreApellido():string{

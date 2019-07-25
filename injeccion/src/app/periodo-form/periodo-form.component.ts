@@ -28,6 +28,7 @@ import { ConstanteContratos } from 'src/constantes/TipoContratoEnum';
 })
 export class PeriodoFormComponent implements OnInit {
 
+  horasRestantes: number;
   periodo: PeriodoAcademico;
   mostrarAviso: boolean;
   horasCumplir: number;
@@ -55,11 +56,16 @@ export class PeriodoFormComponent implements OnInit {
   distribucion: DistribucionDocente;
   horasMedioTiempo: number;
   horasTiempoCompleto: number;
+  horasCumplidasAsignaturaSelecionada: number;
+  permitirHoras: boolean;
 
 
   constructor(private parametroServicio: ParametroService, private asignaturaServicio: AsignaturaServicioService, private paraleloServicio: ParaleloServicioService, private nivelServicio: NivelServicioService, private docenteCarreraServicio: DocenteCarreraServicioService, private docenteServicio: DocenteServicioService, private distribucionServicio: DistribucionDocenteServicioService, private periodoServicio: PeriodoServicioService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.horasRestantes = 0;
+    this.permitirHoras = true;
+    this.horasCumplidasAsignaturaSelecionada = 0;
     this.mostrarAviso = false;
     this.cargarParametros();
     this.mostrarBotonAgregar = false;
@@ -144,11 +150,19 @@ export class PeriodoFormComponent implements OnInit {
     if (this.distribucionesDocente.length == 0) {
       this.totalHoras = 0;
     } else {
+      this.totalHoras = 0;
       this.distribucionesDocente.forEach(element => {
         if (element.horas_clase != null) {
           this.totalHoras = +this.totalHoras + +element.horas_clase;
         }
       });
+    }
+  }
+
+  guardarDistribuciones(idPeriodo) {
+    if (this.distribucionesDocente != null && this.distribucionesDocente.length != 0) {
+      this.distribucionServicio
+        .guardarCompleto(this.distribucionesDocente, idPeriodo);
     }
   }
 
@@ -159,6 +173,7 @@ export class PeriodoFormComponent implements OnInit {
         .pipe(first())
         .subscribe(
           periodo => {
+            this.guardarDistribuciones(periodo.id);
             this.router.navigate(['/periodo-lista']);
           }
         );
@@ -167,7 +182,8 @@ export class PeriodoFormComponent implements OnInit {
       this.periodoServicio
         .actualizarPeriodo(this.periodo, this.id)
         .subscribe(
-          docente => {
+          periodo => {
+            this.guardarDistribuciones(periodo.id);
             this.router.navigate(['/periodo-lista']);
           },
           error => {
@@ -181,7 +197,7 @@ export class PeriodoFormComponent implements OnInit {
   //logica pop up
 
   abrirPopAgregar() {
-    if (this.horasCumplir < this.totalHoras) {
+    if (this.horasCumplir <= this.totalHoras) {
       this.mostrarAviso = true;
     }
 
@@ -241,6 +257,26 @@ export class PeriodoFormComponent implements OnInit {
 
   seleccionarAsignatura(asignatura) {
     this.asignaturaSeleccionada = asignatura;
+    if (this.periodo.id != null) {
+      this.distribucionServicio
+        .getSumaHorasAsignaturaPorPeriodoYParalelo(this.asignaturaSeleccionada.id, this.periodo.id, this.paraleloSeleccionado.id)
+        .pipe(first())
+        .subscribe(
+          numero => {
+            this.horasCumplidasAsignaturaSelecionada = numero
+            if (+this.horasCumplidasAsignaturaSelecionada >= +this.asignaturaSeleccionada.horas_clase) {
+              this.permitirHoras = false;
+            } else {
+              this.permitirHoras = true;
+              this.horasRestantes = +this.asignaturaSeleccionada.horas_clase - +this.horasCumplidasAsignaturaSelecionada;
+            }
+          },
+          error => this.errorMessage = <any>error
+        );
+    } else {
+      this.permitirHoras = true;
+      this.horasRestantes = this.asignaturaSeleccionada.horas_clase;
+    }
   }
 
   onSearchChange(valor): void {
@@ -263,6 +299,9 @@ export class PeriodoFormComponent implements OnInit {
     this.distribucion.periodo = this.periodo;
     if (this.periodo.id != null) {
       this.distribucion.periodos_academicos_id = this.periodo.id;
+    }
+    if (this.distribucionesDocente == null) {
+      this.distribucionesDocente = [];
     }
     this.distribucionesDocente.push(this.distribucion);
     this.calcularHoras();

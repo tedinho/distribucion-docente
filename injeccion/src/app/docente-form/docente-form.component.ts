@@ -81,8 +81,7 @@ export class DocenteFormComponent implements OnInit {
 
   cambiarContrato(e) {
     this.docente.tipo_contrato = e.target.value;
-    this.docente.tipoContrato = e.target.value;
-    console.log(this.docente.tipoContrato + " " + this.docente.tipo_contrato);
+    console.log(this.docente.tipo_contrato);
   }
 
   agregarCarrera(e) {

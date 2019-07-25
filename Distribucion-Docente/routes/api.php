@@ -47,3 +47,4 @@ Route::get('periodos/buscarPorPeriodo/{periodo}', 'PeriodoController@buscarPorPe
 
 Route::resource('distribucion', 'DistribucionDocenteController');
 Route::get('distribucion/buscarPorIdDocente/{id}/{idPeriodo}', 'DistribucionDocenteController@buscarPorIdDocente')->name('distribucion.buscarPorIdDocente');
+Route::get('distribucion/sumaAsignaturasPorPeriodoYParalelo/{idAsignatura}/{idPeriodo}/{idParalelo}', 'DistribucionDocenteController@traerSumaHorasAsignaturaPeriodoYParalelo')->name('distribucion.traerSumaHorasAsignaturaPeriodoYParalelo');
